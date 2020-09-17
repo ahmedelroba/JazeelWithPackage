@@ -27,6 +27,11 @@
  *      description="Testing Server"
  * )
  *
+ * 
+ *  @OA\Server(
+ *      url="https://test2-api.kafu.games/api",
+ *      description="Kafu Test server Server"
+ * )
  *
  *  * @OA\Server(
  *      url="http://gamification.com/api",
