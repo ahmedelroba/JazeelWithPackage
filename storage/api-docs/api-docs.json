@@ -1,0 +1,2887 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Jazeel ",
+        "description": "Jazeel Gamification system",
+        "contact": {
+            "email": "info@uxbert.com"
+        },
+        "license": {
+            "name": "Uxbert",
+            "url": "http://uxbert.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://jazeel-backend.halayalla.com/api",
+            "description": "Production Server"
+        },
+        {
+            "url": "https://jazeel-backend-test.halayalla.rockss/api",
+            "description": "Testing Server"
+        },
+        {
+            "url": "http://gamification.com/api",
+            "description": "Local Server"
+        }
+    ],
+    "paths": {
+        "/create_new_user": {
+            "post": {
+                "tags": [
+                    "Brand's Operations Api"
+                ],
+                "summary": "You can create a new user for any brand by client_id and client_secret.",
+                "operationId": "createBrandsUser",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "first_name": {
+                                        "description": "First name of brand's user.",
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "description": "Last name name of brand's user.",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "Brand's user email address for login by it in jazeel.",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Brand's user password for login by it in jazeel.",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": "Phone number of brand's user but must be starting by 05.",
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "description": "City of brand's user.",
+                                        "type": "string"
+                                    },
+                                    "country": {
+                                        "description": "Country of brand's user.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/add_action_for_user": {
+            "post": {
+                "tags": [
+                    "Brand's Operations Api"
+                ],
+                "summary": "Brands can add lot of actions for users for give them points and make users history.",
+                "operationId": "createBrandsUserAction",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "user_referral_key": {
+                                        "description": "Brand's user referral key, it saved in jazeel when user created.",
+                                        "type": "string"
+                                    },
+                                    "action_key": {
+                                        "description": "Brand's action key (Static key).",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/show_all_points_of_user": {
+            "post": {
+                "tags": [
+                    "Brand's Operations Api"
+                ],
+                "summary": "Show all brand's users points counts.",
+                "operationId": "showUserPointCounters",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "user_referral_key": {
+                                        "description": "Brand's user referral key, it saved in jazeel when user created.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/show_all_points_of_user_history": {
+            "post": {
+                "tags": [
+                    "Brand's Operations Api"
+                ],
+                "summary": "Show all brand's users points history.",
+                "operationId": "showUserPointsHistory",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "user_referral_key": {
+                                        "description": "Brand's user referral key, it saved in jazeel when user created.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/top_users_have_points": {
+            "post": {
+                "tags": [
+                    "Brand's Operations Api"
+                ],
+                "summary": "Show Top brand's users have points.",
+                "operationId": "topUsersHavePoints",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/top_users_got_points": {
+            "post": {
+                "tags": [
+                    "Brand's Operations Api"
+                ],
+                "summary": "Show Top brand's users got points.",
+                "operationId": "topUsersHavePoints",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/top_users_by_brand_action": {
+            "post": {
+                "tags": [
+                    "Brand's Operations Api"
+                ],
+                "summary": "Show Top brand's users got points.",
+                "operationId": "topUsersHavePoints",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "brand_action_key": {
+                                        "description": "Brand's action key (Static key).",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/leaderboard/list": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Get all My leaderboards.",
+                "operationId": "listLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/leaderboard/create": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Create Leaderboard.",
+                "operationId": "createLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "date_from": {
+                                        "type": "string"
+                                    },
+                                    "date_to": {
+                                        "type": "string"
+                                    },
+                                    "terms": {
+                                        "type": "string"
+                                    },
+                                    "action_key": {
+                                        "description": "optional if you want to make leaderboard for custom action.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/leaderboard/updated": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Upldate Leaderboard.",
+                "operationId": "updateLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "leaderboard_key": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "date_from": {
+                                        "type": "string"
+                                    },
+                                    "date_to": {
+                                        "type": "string"
+                                    },
+                                    "terms": {
+                                        "type": "string"
+                                    },
+                                    "action_key": {
+                                        "description": "optional if you want to make leaderboard for custom action.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/leaderboard/delete": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Upldate Leaderboard.",
+                "operationId": "updateLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "leaderboard_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/leaderboard/get_users_of_leaderboard": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Get all Users in leaderboards.",
+                "operationId": "listUsersLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "leaderboard_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/leaderboard/find": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Get details of leaderboard.",
+                "operationId": "listUsersLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "leaderboard_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/leaderboard/search": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "search on leaderboards.",
+                "operationId": "searchLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/actions/list": {
+            "post": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Get all my actions.",
+                "operationId": "listLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/actions/create": {
+            "post": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Create Action.",
+                "operationId": "createAction",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "points": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/actions/updated": {
+            "post": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Upldate Action.",
+                "operationId": "updateAction",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "points": {
+                                        "type": "string"
+                                    },
+                                    "action_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/actions/delete": {
+            "post": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Upldate Action.",
+                "operationId": "updateAction",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "action_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/actions/find": {
+            "post": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Get details of action.",
+                "operationId": "findAction",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "action_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/actions/search": {
+            "post": {
+                "tags": [
+                    "Actions"
+                ],
+                "summary": "Search action with name.",
+                "operationId": "searchAction",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/sponsors/list": {
+            "post": {
+                "tags": [
+                    "Sponsors"
+                ],
+                "summary": "Get all my sponsors.",
+                "operationId": "listSponsors",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/sponsors/create": {
+            "post": {
+                "tags": [
+                    "Sponsors"
+                ],
+                "summary": "Create sponsors.",
+                "operationId": "createSponsors",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "logo": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/sponsors/updated": {
+            "post": {
+                "tags": [
+                    "Sponsors"
+                ],
+                "summary": "Upldate sponsors.",
+                "operationId": "updateSponsors",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "logo": {
+                                        "type": "file"
+                                    },
+                                    "sponsor_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/sponsors/delete": {
+            "post": {
+                "tags": [
+                    "Sponsors"
+                ],
+                "summary": "Upldate sponsors.",
+                "operationId": "deleteSponsors",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "sponsor_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/sponsors/find": {
+            "post": {
+                "tags": [
+                    "Sponsors"
+                ],
+                "summary": "Get details of sponsors.",
+                "operationId": "findSponsors",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "sponsor_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/sponsors/search": {
+            "post": {
+                "tags": [
+                    "Sponsors"
+                ],
+                "summary": "Search sponsors with name.",
+                "operationId": "searchsponsors",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards/list": {
+            "post": {
+                "tags": [
+                    "Rewards"
+                ],
+                "summary": "Get all my rewards.",
+                "operationId": "listrewards",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards/create": {
+            "post": {
+                "tags": [
+                    "Rewards"
+                ],
+                "summary": "Create rewards.",
+                "operationId": "createRewards",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "sponsor_key": {
+                                        "type": "string"
+                                    },
+                                    "amount": {
+                                        "type": "string"
+                                    },
+                                    "leaderboard_key": {
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards/updated": {
+            "post": {
+                "tags": [
+                    "Rewards"
+                ],
+                "summary": "Upldate rewards.",
+                "operationId": "updateRewards",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "sponsor_key": {
+                                        "type": "string"
+                                    },
+                                    "amount": {
+                                        "type": "string"
+                                    },
+                                    "leaderboard_key": {
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "type": "file"
+                                    },
+                                    "reward_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards/delete": {
+            "post": {
+                "tags": [
+                    "Rewards"
+                ],
+                "summary": "Delete rewards.",
+                "operationId": "deleteRewards",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "reward_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards/find": {
+            "post": {
+                "tags": [
+                    "Rewards"
+                ],
+                "summary": "Get details of reward.",
+                "operationId": "findRewards",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "reward_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards/search": {
+            "post": {
+                "tags": [
+                    "Rewards"
+                ],
+                "summary": "Search rewards with name.",
+                "operationId": "searchRewards",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards_history/list": {
+            "post": {
+                "tags": [
+                    "RewardsHistory"
+                ],
+                "summary": "Get all my rewards_history.",
+                "operationId": "listrewards_history",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards_history/create": {
+            "post": {
+                "tags": [
+                    "RewardsHistory"
+                ],
+                "summary": "Create rewards_history.",
+                "operationId": "createrewards_history",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "user_key": {
+                                        "type": "string"
+                                    },
+                                    "quantity": {
+                                        "type": "string"
+                                    },
+                                    "reward_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards_history/updated": {
+            "post": {
+                "tags": [
+                    "RewardsHistory"
+                ],
+                "summary": "Upldate rewards_history.",
+                "operationId": "updaterewards_history",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "user_key": {
+                                        "type": "string"
+                                    },
+                                    "quantity": {
+                                        "type": "string"
+                                    },
+                                    "reward_key": {
+                                        "type": "string"
+                                    },
+                                    "reward_history_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards_history/delete": {
+            "post": {
+                "tags": [
+                    "RewardsHistory"
+                ],
+                "summary": "Delete rrewards_history.",
+                "operationId": "deleterewards_history",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "reward_history_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards_history/find": {
+            "post": {
+                "tags": [
+                    "RewardsHistory"
+                ],
+                "summary": "Get details of rewards_history.",
+                "operationId": "findrewards_history",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "reward_history_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/rewards_history/search": {
+            "post": {
+                "tags": [
+                    "RewardsHistory"
+                ],
+                "summary": "Search rewards_history with name.",
+                "operationId": "searchrewards_history",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "Password Based": {
+                "type": "oauth2",
+                "description": "Use a global client_id / client_secret and your username / password combo to obtain a token",
+                "in": "header",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "/oauth/authorize",
+                        "tokenUrl": "/oauth/token",
+                        "refreshUrl": "/oauth/token/refresh",
+                        "scopes": {}
+                    }
+                },
+                "scheme": "https"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Brand's Operations Api",
+            "description": "Operations about brand"
+        },
+        {
+            "name": "Leaderboard"
+        }
+    ]
+}
