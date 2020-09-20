@@ -19,6 +19,7 @@ class ActionResource extends JsonResource
             'description' => $this->description,
             'key' => $this->key,
             'type' => $this->type,
+            'status' => true,
             'points' => $this->points,
         ];
     }
