@@ -61,8 +61,8 @@ class ActionController extends Controller
     public function show(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
-        if (!empty($checking) && !empty($request->key)) {
-            $actions = Action::where('client_id', $checking->id)->where('key', $request->key)->first();
+        if (!empty($checking) && !empty($request->action_key)) {
+            $actions = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
             return ActionResource::collection($actions);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
@@ -77,7 +77,7 @@ class ActionController extends Controller
     public function search(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
-        if (!empty($checking) && !empty($request->key)) {
+        if (!empty($checking) && !empty($request->action_key)) {
             $actions = Action::where('client_id', $checking->id)->Where('name', 'LIKE', '%' . $request->name . '%')->get();
             return ActionResource::collection($actions);
         }
@@ -93,8 +93,8 @@ class ActionController extends Controller
     public function find(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
-        if (!empty($checking) && !empty($request->key)) {
-            $actions = Action::where('client_id', $checking->id)->where('key', $request->key)->first();
+        if (!empty($checking) && !empty($request->action_key)) {
+            $actions = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
             return new ActionResource($actions);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
@@ -131,7 +131,7 @@ class ActionController extends Controller
     public function destroy(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
-        if (!empty($checking) && !empty($request->key)) {
+        if (!empty($checking) && !empty($request->action_key)) {
 
             return (new StatusCollection(true, 'You are added new action successfully.'))->response()->setStatusCode(200);
         }
