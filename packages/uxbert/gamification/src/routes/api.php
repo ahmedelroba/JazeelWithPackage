@@ -8,7 +8,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('delete', 'LeaderBoardController@destroy');
     Route::post('list', 'LeaderBoardController@index');
     Route::post('get_users_of', 'LeaderBoardController@getUsersOfLeaderboard');
-    Route::post('find', 'LeaderBoardController@show');
+    Route::post('find', 'LeaderBoardController@find');
     Route::post('search', 'LeaderBoardController@search');
 });
 
@@ -17,7 +17,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('updated', 'ActionController@update');
     Route::post('delete', 'ActionController@destroy');
     Route::post('list', 'ActionController@index');
-    Route::post('find', 'ActionController@show');
+    Route::post('find', 'ActionController@find');
     Route::post('search', 'ActionController@search');
 });
 
@@ -26,7 +26,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('updated', 'RewardsController@update');
     Route::post('delete', 'RewardsController@destroy');
     Route::post('list', 'RewardsController@index');
-    Route::post('find', 'RewardsController@show');
+    Route::post('find', 'RewardsController@find');
     Route::post('search', 'RewardsController@search');
 });
 
@@ -35,7 +35,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('updated', 'RewardsHistoryController@update');
     Route::post('delete', 'RewardsHistoryController@destroy');
     Route::post('list', 'RewardsHistoryController@index');
-    Route::post('find', 'RewardsHistoryController@show');
+    Route::post('find', 'RewardsHistoryController@find');
     Route::post('search', 'RewardsHistoryController@search');
 });
 
@@ -44,7 +44,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('updated', 'SponsersController@update');
     Route::post('delete', 'SponsersController@destroy');
     Route::post('list', 'SponsersController@index');
-    Route::post('find', 'SponsersController@show');
+    Route::post('find', 'SponsersController@find');
     Route::post('search', 'SponsersController@search');
 });
 

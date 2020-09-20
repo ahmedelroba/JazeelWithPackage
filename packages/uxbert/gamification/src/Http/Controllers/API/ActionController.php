@@ -79,6 +79,22 @@ class ActionController extends Controller
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->key)) {
             $actions = Action::where('client_id', $checking->id)->Where('name', 'LIKE', '%' . $request->name . '%')->get();
+            return ActionResource::collection($actions);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Action  $action
+     * @return \Illuminate\Http\Response
+     */
+    public function find(Request $request)
+    {
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->key)) {
+            $actions = Action::where('client_id', $checking->id)->where('key', $request->key)->first();
             return new ActionResource($actions);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
