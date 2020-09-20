@@ -4,7 +4,7 @@
 
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/leaderboard', 'middleware' => 'api'], function () {
     Route::post('create', 'LeaderBoardController@store');
-    Route::post('updated', 'LeaderBoardController@update');
+    Route::post('update', 'LeaderBoardController@update');
     Route::post('delete', 'LeaderBoardController@destroy');
     Route::post('list', 'LeaderBoardController@index');
     Route::post('get_users_of', 'LeaderBoardController@getUsersOfLeaderboard');
@@ -14,7 +14,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
 
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/actions', 'middleware' => 'api'], function () {
     Route::post('create', 'ActionController@store');
-    Route::post('updated', 'ActionController@update');
+    Route::post('update', 'ActionController@update');
     Route::post('delete', 'ActionController@destroy');
     Route::post('list', 'ActionController@index');
     Route::post('find', 'ActionController@find');
@@ -23,7 +23,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
 
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/rewards', 'middleware' => 'api'], function () {
     Route::post('create', 'RewardsController@store');
-    Route::post('updated', 'RewardsController@update');
+    Route::post('update', 'RewardsController@update');
     Route::post('delete', 'RewardsController@destroy');
     Route::post('list', 'RewardsController@index');
     Route::post('find', 'RewardsController@find');
@@ -32,7 +32,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
 
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/rewards_history', 'middleware' => 'api'], function () {
     Route::post('create', 'RewardsHistoryController@store');
-    Route::post('updated', 'RewardsHistoryController@update');
+    Route::post('update', 'RewardsHistoryController@update');
     Route::post('delete', 'RewardsHistoryController@destroy');
     Route::post('list', 'RewardsHistoryController@index');
     Route::post('find', 'RewardsHistoryController@find');
@@ -41,7 +41,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
 
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/sponsors', 'middleware' => 'api'], function () {
     Route::post('create', 'SponsersController@store');
-    Route::post('updated', 'SponsersController@update');
+    Route::post('update', 'SponsersController@update');
     Route::post('delete', 'SponsersController@destroy');
     Route::post('list', 'SponsersController@index');
     Route::post('find', 'SponsersController@find');

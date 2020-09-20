@@ -45,6 +45,7 @@ class ActionController extends Controller
                 'key'           => $random_key,
                 'points'        => $request->points,
                 'type'          => 'plus',
+                'status'        => $request->status,
                 'client_id'     => $checking->id
             ]);
             return (new StatusCollection(true, 'You are added new action successfully.'))->response()->setStatusCode(200);
@@ -116,6 +117,7 @@ class ActionController extends Controller
             $action->description = utf8_encode($request->description);
             $action->key = utf8_encode($request->action_key);
             $action->points = utf8_encode($request->points);
+            $action->status = (boolean) $request->status ?? $action->status;
             $action->save();
             return new ActionResource($action);
         }

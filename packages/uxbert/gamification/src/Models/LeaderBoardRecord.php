@@ -4,7 +4,7 @@ namespace Uxbert\Gamification\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class LeaderBoardRecords extends Model
+class LeaderBoardRecord extends Model
 {
     protected $connection = 'mongodb';
     protected $collection = 'leaderboards';

@@ -4,7 +4,7 @@ namespace Uxbert\Gamification\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class Rewards extends Model
+class Reward extends Model
 {
     protected $connection = 'mongodb';
     protected $collection = 'rewards';

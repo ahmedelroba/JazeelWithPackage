@@ -1180,6 +1180,9 @@
                                     },
                                     "points": {
                                         "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "boolean"
                                     }
                                 },
                                 "type": "object"
@@ -1259,6 +1262,9 @@
                                         "type": "string"
                                     },
                                     "action_key": {
+                                        "type": "string"
+                                    },
+                                    "status": {
                                         "type": "string"
                                     }
                                 },

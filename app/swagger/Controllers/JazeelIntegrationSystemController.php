@@ -723,6 +723,7 @@
  *                 @OA\Property(property="name",            type="string"),
  *                 @OA\Property(property="description",     type="string"),
  *                 @OA\Property(property="points",          type="string"),
+ *                 @OA\Property(property="status",          type="boolean"),
  *             )
  *         )
  *     ),
@@ -771,6 +772,7 @@
  *                 @OA\Property(property="description",     type="string"),
  *                 @OA\Property(property="points",          type="string"),
  *                 @OA\Property(property="action_key",      type="string"),
+ *                 @OA\Property(property="status",          type="boolean"),
  *             )
  *         )
  *     ),
