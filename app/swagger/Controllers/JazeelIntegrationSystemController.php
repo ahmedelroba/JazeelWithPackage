@@ -423,7 +423,7 @@
 
 /**
  * @OA\Post(
- *     path="/leaderboard/updated",
+ *     path="/leaderboard/update",
  *     tags={"Leaderboard"},
  *     summary="Upldate Leaderboard.",
  *     operationId="updateLeaderboard",
@@ -758,7 +758,7 @@
 
 /**
  * @OA\Post(
- *     path="/actions/updated",
+ *     path="/actions/update",
  *     tags={"Actions"},
  *     summary="Upldate Action.",
  *     operationId="updateAction",
@@ -1045,7 +1045,7 @@
 
 /**
  * @OA\Post(
- *     path="/sponsors/updated",
+ *     path="/sponsors/update",
  *     tags={"Sponsors"},
  *     summary="Upldate sponsors.",
  *     operationId="updateSponsors",
@@ -1333,7 +1333,7 @@
 
 /**
  * @OA\Post(
- *     path="/rewards/updated",
+ *     path="/rewards/update",
  *     tags={"Rewards"},
  *     summary="Upldate rewards.",
  *     operationId="updateRewards",
@@ -1624,7 +1624,7 @@
 
 /**
  * @OA\Post(
- *     path="/rewards_history/updated",
+ *     path="/rewards_history/update",
  *     tags={"RewardsHistory"},
  *     summary="Upldate rewards_history.",
  *     operationId="updaterewards_history",
