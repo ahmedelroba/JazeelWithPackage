@@ -77,7 +77,7 @@ class ActionController extends Controller
     public function search(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
-        if (!empty($checking) && !empty($request->action_key)) {
+        if (!empty($checking)) {
             $actions = Action::where('client_id', $checking->id)->Where('name', 'LIKE', '%' . $request->name . '%')->get();
             return ActionResource::collection($actions);
         }
