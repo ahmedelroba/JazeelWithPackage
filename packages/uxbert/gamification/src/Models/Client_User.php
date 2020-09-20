@@ -16,7 +16,7 @@ class Client_User extends Model
     protected $action_id;
 
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'city', 'country', 'phone', 'status', 'user_id', 'referral_key'
+        'first_name', 'last_name', 'email', 'password', 'city', 'country', 'phone', 'status', 'user_id', 'referral_key', 
     ];
 
     protected $appends = [

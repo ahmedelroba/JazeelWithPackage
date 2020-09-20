@@ -4,13 +4,13 @@ namespace Uxbert\Gamification\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 
-class Action extends Model
+class ActionCategory extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'actions';
+    protected $collection = 'action_categories';
 
     protected $fillable = [
-        'name', 'description', 'key', 'points', 'type','status', 'client_id', 'category_id'
+        'name', 'description', 'key', 'status', 'client_id'
     ];
 
     public function transactions()

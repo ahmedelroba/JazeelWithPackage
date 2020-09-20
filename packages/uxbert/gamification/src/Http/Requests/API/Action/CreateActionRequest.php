@@ -33,7 +33,7 @@ class CreateActionRequest extends FormRequest
             'client_secret' => 'required',
             'name' => 'required|max:245',
             'description' => 'min:20',
-            'key' => ['unique_custom:actions,key,client_id,' . optional($brand)->id, 'required'],
+            // 'key' => ['unique_custom:actions,key,client_id,' . optional($brand)->id, 'required'],
             'points' => 'required',
 
         ];

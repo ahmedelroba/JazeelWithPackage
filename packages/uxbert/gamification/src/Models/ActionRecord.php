@@ -10,7 +10,7 @@ class ActionRecord extends Model
     protected $collection = 'action_records';
 
     protected $fillable = [
-        'user_id', 'action_id', 'client_id', 'current_points', 'type', 'description'
+        'user_id', 'action_id', 'client_id', 'current_points', 'type', 'description', 'category_id'
     ];
 
     public function user()

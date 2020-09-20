@@ -10,13 +10,8 @@ class LeaderBoard extends Model
     protected $collection = 'leaderboards';
 
     protected $fillable = [
-        'name', 'description', 'key', 'date_from', 'date_to', 'action_id', 'client_id', 'terms'
+        'name', 'description', 'key', 'date_from', 'date_to', 'client_id', 'terms'
     ];
-
-    public function action()
-    {
-        return $this->belongsTo(Action::class, 'action_id', '_id');
-    }
 
     public function client()
     {
