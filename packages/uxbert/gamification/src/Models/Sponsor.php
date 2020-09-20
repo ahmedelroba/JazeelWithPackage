@@ -13,6 +13,8 @@ class Sponsor extends Model
         'name', 
         'logo', 
         'description', 
-        'status' // active or not
+        'status', // active or not
+        'key',
+        'client_id' 
     ];
 }

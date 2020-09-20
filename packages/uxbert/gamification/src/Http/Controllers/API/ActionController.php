@@ -115,7 +115,6 @@ class ActionController extends Controller
             $action = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
             $action->name = utf8_encode($request->name);
             $action->description = utf8_encode($request->description);
-            $action->key = utf8_encode($request->action_key);
             $action->points = utf8_encode($request->points);
             $action->status = (boolean) $request->status ?? $action->status;
             $action->save();

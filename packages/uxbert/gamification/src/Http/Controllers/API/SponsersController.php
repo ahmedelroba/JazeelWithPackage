@@ -8,6 +8,8 @@ use Uxbert\Gamification\Http\Requests\API\Sponsor\CreateSponsorRequest;
 use Uxbert\Gamification\Http\Resources\Jazeel\StatusCollection;
 use Uxbert\Gamification\Http\Resources\Sponsor\SponsorResource;
 use Uxbert\Gamification\Models\Sponsor;
+use Uxbert\Gamification\Helpers\Helper;
+use Uxbert\Gamification\Models\Client;
 
 class SponsersController extends Controller
 {
@@ -16,7 +18,7 @@ class SponsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
@@ -53,8 +55,8 @@ class SponsersController extends Controller
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->sponsor_key)) {
-            $actions = Sponsor::where('client_id', $checking->id)->where('key', $request->sponsor_key)->first();
-            return new SponsorResource($actions);
+            $sponsors = Sponsor::where('client_id', $checking->id)->where('key', $request->sponsor_key)->first();
+            return new SponsorResource($sponsors);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
@@ -70,20 +72,23 @@ class SponsersController extends Controller
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
-            $random_key = Helper::unique_random('actions', 'key');
-            Action::create([
+            $fileInputName = 'logo';
+            $fileMedia = null;
+            if ($request->hasFile($fileInputName))
+                $fileMedia = (string) Helper::UpdateFile($request, 'uploads/sponsors/' . Helper::GenerateRandomString() . '/' . Helper::GenerateRandomString() . '/', $fileInputName);
+
+            $random_key = Helper::unique_random('sponsors', 'key');
+            $sponsors = Sponsor::create([
                 'name'          => utf8_encode($request->name),
-                'description'   => $request->description,
+                'description'   => utf8_encode($request->description),
+                'logo'          => $fileMedia,
+                'status'        => $request->status,
                 'key'           => $random_key,
-                'points'        => $request->points,
-                'type'          => 'plus',
                 'client_id'     => $checking->id
             ]);
-            return (new StatusCollection(true, 'You are added new action successfully.'))->response()->setStatusCode(200);
+            return new SponsorResource($sponsors);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
-
-        return new SponsorResource(['1']);
     }
 
     /**
@@ -95,7 +100,22 @@ class SponsersController extends Controller
      */
     public function update(CreateSponsorRequest $request)
     {
-        return new SponsorResource(['1']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->sponsor_key)) {
+             $sponsor = Sponsor::where('client_id', $checking->id)->where('key', $request->sponsor_key)->first();
+            $fileInputName = 'logo';
+            $fileMedia = null;
+            if ($request->hasFile($fileInputName))
+                $fileMedia = (string) Helper::UpdateFile($request, 'uploads/sponsors/' . Helper::GenerateRandomString() . '/' . Helper::GenerateRandomString() . '/', $fileInputName, $sponsor->logo);
+
+            $sponsor->name = utf8_encode($request->name);
+            $sponsor->description = utf8_encode($request->description);
+            $sponsor->logo = $fileMedia ?? $sponsor->logo;
+            $sponsor->status = $request->status;
+            $sponsor->save();
+            return new SponsorResource($sponsor);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**

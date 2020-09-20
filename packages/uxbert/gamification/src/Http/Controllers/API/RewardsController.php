@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Uxbert\Gamification\Http\Requests\API\Reward\CreateRewardRequest;
 use Uxbert\Gamification\Http\Resources\Jazeel\StatusCollection;
-use Uxbert\Gamification\Http\Resources\Sponsor\RewardResource;
+use Uxbert\Gamification\Http\Resources\Reward\RewardResource;
+use Uxbert\Gamification\Models\Reward;
+use Uxbert\Gamification\Helpers\Helper;
+use Uxbert\Gamification\Models\Client;
+use Uxbert\Gamification\Models\Sponsor;
 
 class RewardsController extends Controller
 {
@@ -15,9 +19,14 @@ class RewardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return RewardResource::collection(['1', '2', '3']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking)) {
+            $reward = Reward::where('client_id', $checking->id)->get();
+            return RewardResource::collection($reward);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**
@@ -28,20 +37,30 @@ class RewardsController extends Controller
      */
     public function search(Request $request)
     {
-        return RewardResource::collection(['1', '2', '3']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking)) {
+            $reward = Reward::where('client_id', $checking->id)->Where('name', 'LIKE', '%' . $request->name . '%')->get();
+            return RewardResource::collection($reward);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
-
-    /**
-     * Show a newly created resource in storage.
+     /**
+     * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Action  $action
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function find(Request $request)
     {
-        return new RewardResource(['1']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->reward_key)) {
+            $reward = Reward::where('client_id', $checking->id)->where('key', $request->reward_key)->first();
+            return new RewardResource($reward);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -51,7 +70,30 @@ class RewardsController extends Controller
      */
     public function store(CreateRewardRequest $request)
     {
-        return new RewardResource(['1']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking)) {
+            $fileInputName = 'image';
+            $fileMedia = null;
+            if ($request->hasFile($fileInputName))
+                $fileMedia = (string) Helper::UpdateFile($request, 'uploads/rewards/' . Helper::GenerateRandomString() . '/' . Helper::GenerateRandomString() . '/', $fileInputName);
+            
+            $sponsor = Sponsor::where('client_id', $checking->id)->where('key', $request->sponsor_key)->first();
+            if(!$sponsor)
+                return (new StatusCollection(false, 'You entered wrong sponser key.'))->response()->setStatusCode(401);
+
+            $random_key = Helper::unique_random('sponsors', 'key');
+            $reward = Reward::create([
+                'name'          => utf8_encode($request->name),
+                'description'   => utf8_encode($request->description),
+                'image'         => $fileMedia,
+                'key'           => $random_key,
+                'quantity'      => $request->quantity,
+                'sponsor_id'    => $sponsor->id,
+                'client_id'     => $checking->id
+            ]);
+            return new RewardResource($reward);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**
@@ -63,7 +105,29 @@ class RewardsController extends Controller
      */
     public function update(CreateRewardRequest $request)
     {
-        return new RewardResource(['1']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->reward_key)) {
+            $reward = Reward::where('client_id', $checking->id)->where('key', $request->reward_key)->first();
+            $fileInputName= 'image';
+            $fileMedia = null;
+            if ($request->hasFile($fileInputName))
+                $fileMedia = (string) Helper::UpdateFile($request, 'uploads/sponsors/' . Helper::GenerateRandomString() . '/' . Helper::GenerateRandomString() . '/', $fileInputName, $reward->image);
+
+            if ($request->sponsor_key != "") {
+                $sponsor = Sponsor::where('client_id', $checking->id)->where('key', $request->sponsor_key)->first();
+                if(!$sponsor)
+                    return (new StatusCollection(false, 'You entered wrong sponser key.'))->response()->setStatusCode(401);
+            }
+
+            $reward->name           = utf8_encode($request->name);
+            $reward->description    = utf8_encode($request->description);
+            $reward->image          = $fileMedia ?? $reward->image;
+            $reward->quantity       =  $request->quantity;
+            $reward->sponsor_id     = $request->sponsor_key != "" ?  $sponsor->id : $reward->sponsor_id;
+            $reward->save();
+            return new RewardResource($reward);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**
@@ -75,5 +139,15 @@ class RewardsController extends Controller
     public function destroy(Request $request)
     {
         return (new StatusCollection(true, 'You are deleted leaderboard successfully.'))->response()->setStatusCode(200);
+    }
+
+    /**
+     * This function for checking Client id and Client Secret.
+     *
+     * @param Request request
+     */
+    private function checkingClientIdAndSecret($request)
+    {
+        return Client::where('client_id', $request->client_id)->where('client_secret', $request->client_secret)->first();
     }
 }

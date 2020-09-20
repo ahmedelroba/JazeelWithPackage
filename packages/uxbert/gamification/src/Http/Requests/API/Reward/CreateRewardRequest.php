@@ -30,8 +30,7 @@ class CreateRewardRequest extends FormRequest
             'description'   => 'required',
             'sponsor_key'   => '',
             'image'         => 'required|image',
-            'amount'        => 'required|numeric|min:0|max:99999999',
-            'leaderboard_key'   => '',
+            'quantity'        => 'required|numeric|min:0|max:99999999',
         ];
     }
 }

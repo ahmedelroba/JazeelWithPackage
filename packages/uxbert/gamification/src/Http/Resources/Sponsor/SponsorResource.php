@@ -4,6 +4,7 @@ namespace Uxbert\Gamification\Http\Resources\Sponsor;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Uxbert\Gamification\Helpers\Helper;
 
 class SponsorResource extends JsonResource
 {
@@ -17,11 +18,11 @@ class SponsorResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "name" => "Halayalla",
-            "description" => "it's one product of Uxbert.",
-            "logo" => "https://i.pinimg.com/originals/3f/fc/52/3ffc52eb85fc402387c766cde53983af.png",
-            "key" => 'jasd6sd721sas',
-            "status" => true,
+            "name" => $this->name,
+            "description" => $this->description,
+            "logo" => Helper::GetURL($this->logo),
+            "key" => $this->key,
+            "status" => $this->status,
         ];
     }
 }

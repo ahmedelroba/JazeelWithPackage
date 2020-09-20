@@ -1623,7 +1623,7 @@
                                         "type": "string"
                                     },
                                     "status": {
-                                        "type": "string"
+                                        "type": "boolean"
                                     },
                                     "logo": {
                                         "type": "file"
@@ -1703,7 +1703,7 @@
                                         "type": "string"
                                     },
                                     "status": {
-                                        "type": "string"
+                                        "type": "boolean"
                                     },
                                     "logo": {
                                         "type": "file"
@@ -2069,10 +2069,7 @@
                                     "sponsor_key": {
                                         "type": "string"
                                     },
-                                    "amount": {
-                                        "type": "string"
-                                    },
-                                    "leaderboard_key": {
+                                    "quantity": {
                                         "type": "string"
                                     },
                                     "image": {
@@ -2155,10 +2152,7 @@
                                     "sponsor_key": {
                                         "type": "string"
                                     },
-                                    "amount": {
-                                        "type": "string"
-                                    },
-                                    "leaderboard_key": {
+                                    "quantity": {
                                         "type": "string"
                                     },
                                     "image": {

@@ -1,10 +1,13 @@
 <?php
 
-namespace Uxbert\Gamification\Http\Resources\Sponsor;
+namespace Uxbert\Gamification\Http\Resources\Reward;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
+use Uxbert\Gamification\Http\Resources\Sponsor\SponsorResource;
+use Uxbert\Gamification\Models\Sponsor;
+use Uxbert\Gamification\Helpers\Helper;
 
 class RewardResource extends JsonResource
 {
@@ -17,13 +20,14 @@ class RewardResource extends JsonResource
      */
     public function toArray($request)
     {
+        $sponsor = Sponsor::find($this->sponsor_id);
         return [
-            'name'          => 'Test Leader board',
-            'description'   => 'Test Leaderboard description',
-            'quantity'      => 10,
-            "image"         => "https://i.pinimg.com/originals/3f/fc/52/3ffc52eb85fc402387c766cde53983af.png",
-            'sponsor'       => new SponsorResource(["1"]),
-            'key'           => 'testkey6635',
+            'name'          => $this->name,
+            'description'   => $this->description,
+            'quantity'      => $this->quantity,
+            "image"         => Helper::GetURL($this->image),
+            'sponsor'       => new SponsorResource($sponsor),
+            'key'           => $this->key,
         ];
     }
 }

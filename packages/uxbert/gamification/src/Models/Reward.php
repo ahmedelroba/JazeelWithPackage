@@ -14,7 +14,9 @@ class Reward extends Model
         'description', 
         'quantity', 
         'image', 
-        'sponsor_id'
+        'key', 
+        'sponsor_id',
+        'client_id'
     ];
 
     public function sponsor()

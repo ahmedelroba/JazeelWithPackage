@@ -1008,7 +1008,7 @@
  *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
  *                 @OA\Property(property="name",            type="string"),
  *                 @OA\Property(property="description",     type="string"),
- *                 @OA\Property(property="status",          type="string"),
+ *                 @OA\Property(property="status",          type="boolean"),
  *                 @OA\Property(property="logo",          type="file"),
  *             )
  *         )
@@ -1057,7 +1057,7 @@
  *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
  *                 @OA\Property(property="name",            type="string"),
  *                 @OA\Property(property="description",     type="string"),
- *                 @OA\Property(property="status",          type="string"),
+ *                 @OA\Property(property="status",          type="boolean"),
  *                 @OA\Property(property="logo",            type="file"),
  *                 @OA\Property(property="sponsor_key",     type="string"),
  *             )
@@ -1295,8 +1295,7 @@
  *                 @OA\Property(property="name",            type="string"),
  *                 @OA\Property(property="description",     type="string"),
  *                 @OA\Property(property="sponsor_key",     type="string"),
- *                 @OA\Property(property="amount",          type="string"),
- *                 @OA\Property(property="leaderboard_key", type="string"),
+ *                 @OA\Property(property="quantity",          type="string"),
  *                 @OA\Property(property="image",           type="file"),
  *             )
  *         )
@@ -1346,8 +1345,7 @@
  *                 @OA\Property(property="name",            type="string"),
  *                 @OA\Property(property="description",     type="string"),
  *                 @OA\Property(property="sponsor_key",     type="string"),
- *                 @OA\Property(property="amount",          type="string"),
- *                 @OA\Property(property="leaderboard_key", type="string"),
+ *                 @OA\Property(property="quantity",        type="string"),
  *                 @OA\Property(property="image",           type="file"),
  *                 @OA\Property(property="reward_key",      type="string"),
  *             )
