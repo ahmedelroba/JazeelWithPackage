@@ -4,10 +4,10 @@
 
 /**
  * @OA\Post(
- *     path="/create_new_user",
- *     tags={"Brand's Operations Api"},
+ *     path="users/create",
+ *     tags={"Users"},
  *     summary="You can create a new user for any brand by client_id and client_secret.",
- *     operationId="createBrandsUser",
+ *     operationId="createUser",
  *      @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/x-www-form-urlencoded",
@@ -53,10 +53,10 @@
 
 /**
  * @OA\Post(
- *     path="/add_action_for_user",
- *     tags={"Brand's Operations Api"},
+ *     path="/add_point",
+ *     tags={"Users"},
  *     summary="Brands can add lot of actions for users for give them points and make users history.",
- *     operationId="createBrandsUserAction",
+ *     operationId="add_point",
  *      @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/x-www-form-urlencoded",
@@ -143,10 +143,10 @@
 
 /**
  * @OA\Post(
- *     path="/show_all_points_of_user_history",
- *     tags={"Brand's Operations Api"},
+ *     path="/actions_records",
+ *     tags={"Users"},
  *     summary="Show all brand's users points history.",
- *     operationId="showUserPointsHistory",
+ *     operationId="actions_records",
  *      @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/x-www-form-urlencoded",
@@ -154,6 +154,51 @@
  *                 @OA\Property(property="client_id",       type="string", description="Unique brand id."),
  *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
  *                 @OA\Property(property="user_referral_key",         type="string", description="Brand's user referral key, it saved in jazeel when user created."),
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Validation error",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Cutom error message",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     security={
+ *         {"petstore_auth": {"write:pets", "read:pets"}}
+ *     },
+ * )
+ */
+
+
+/**
+ * @OA\Post(
+ *     path="/get_leaderboards",
+ *     tags={"Users"},
+ *     summary="Show all brand's users points history.",
+ *     operationId="get_leaderboards",
+ *      @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/x-www-form-urlencoded",
+ *             @OA\Schema(
+ *                 @OA\Property(property="client_id",       type="string", description="Unique brand id."),
+ *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
+ *                 @OA\Property(property="user_referral_key",         type="string", description="Brand's user referral key, it saved in jazeel when user created."),
+ *                 @OA\Property(property="status",         type="string", description="Leaderboard status ['all' -  'active' - 'inactive']."),
  *             )
  *         )
  *     ),

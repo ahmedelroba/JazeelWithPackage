@@ -31,13 +31,13 @@
         }
     ],
     "paths": {
-        "/create_new_user": {
+        "users/create": {
             "post": {
                 "tags": [
-                    "Brand's Operations Api"
+                    "Users"
                 ],
                 "summary": "You can create a new user for any brand by client_id and client_secret.",
-                "operationId": "createBrandsUser",
+                "operationId": "createUser",
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
@@ -127,13 +127,13 @@
                 ]
             }
         },
-        "/add_action_for_user": {
+        "/add_point": {
             "post": {
                 "tags": [
-                    "Brand's Operations Api"
+                    "Users"
                 ],
                 "summary": "Brands can add lot of actions for users for give them points and make users history.",
-                "operationId": "createBrandsUserAction",
+                "operationId": "add_point",
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
@@ -275,13 +275,13 @@
                 ]
             }
         },
-        "/show_all_points_of_user_history": {
+        "/actions_records": {
             "post": {
                 "tags": [
-                    "Brand's Operations Api"
+                    "Users"
                 ],
                 "summary": "Show all brand's users points history.",
-                "operationId": "showUserPointsHistory",
+                "operationId": "actions_records",
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {
@@ -297,6 +297,82 @@
                                     },
                                     "user_referral_key": {
                                         "description": "Brand's user referral key, it saved in jazeel when user created.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/get_leaderboards": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Show all brand's users points history.",
+                "operationId": "get_leaderboards",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "user_referral_key": {
+                                        "description": "Brand's user referral key, it saved in jazeel when user created.",
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "description": "Leaderboard status ['all' -  'active' - 'inactive'].",
                                         "type": "string"
                                     }
                                 },
