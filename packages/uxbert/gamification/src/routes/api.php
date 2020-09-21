@@ -48,6 +48,13 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('search', 'SponsersController@search');
 });
 
+Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/users', 'middleware' => 'api'], function () {
+    Route::post('add_point', 'JazeelApiController@add_new_action_for_brand_user');
+    Route::post('actions_records', 'JazeelApiController@show_user_points_history');
+    Route::post('create', 'JazeelApiController@create_new_user');
+    Route::post('get_leaderboards', 'LeaderBoardController@index');
+});
+
 
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api', 'middleware' => 'api'], function () {
     /*
@@ -58,13 +65,13 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('users/get_leaderboards', 'LeaderBoardController@getLeaderboardsOfUser');
 
     Route::post('create_new_brand', 'JazeelApiController@create_new_brand');
-    Route::post('users/create', 'JazeelApiController@create_new_user');
     Route::post('add_new_brand_action', 'JazeelApiController@add_brand_action');
     Route::post('brand_actions_list', 'JazeelApiController@getting_all_brand_action');
-    Route::post('users/add_point', 'JazeelApiController@add_new_action_for_brand_user');
+
     Route::post('show_all_points_of_user', 'JazeelApiController@show_user_points');
-    Route::post('users/actions_records', 'JazeelApiController@show_user_points_history');
     Route::post('top_users_have_points', 'JazeelApiController@top_users_have_points');
     Route::post('top_users_got_points', 'JazeelApiController@top_users_got_points');
     Route::post('top_users_by_brand_action', 'JazeelApiController@top_users_by_brand_action');
+
+
 });
