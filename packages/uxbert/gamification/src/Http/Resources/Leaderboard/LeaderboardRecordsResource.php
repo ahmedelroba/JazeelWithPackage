@@ -19,6 +19,7 @@ class LeaderboardRecordsResource extends JsonResource
             'points' => 1000,
             'rank' => 2,
             'user_key' => 'adssdh88',
+            'user_md5_hash' => md5("test@test.com"),
             'leaderboard_key' => 'yt54dggss',
         ];
     }

@@ -5,6 +5,8 @@ namespace Uxbert\Gamification\Http\Resources\Leaderboard;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Uxbert\Gamification\Http\Resources\Jazeel\BrandActionResource;
 use Uxbert\Gamification\Models\Action;
+use Uxbert\Gamification\Models\LeaderBoardRecord;
+use Uxbert\Gamification\Http\Resources\Reward\RewardResourceDummy;
 
 class LeaderboardResource extends JsonResource
 {
@@ -16,12 +18,6 @@ class LeaderboardResource extends JsonResource
      */
     public function toArray($request)
     {
-        if (!empty($request->action_key)) {
-            $action = Action::where('key', $request->action_key)->first();
-            if (!empty($action))
-                $actionDetails = new BrandActionResource($action);
-        } else
-            $actionDetails = null;
         // return [
         //     'name'          => $this->name,
         //     'description'   => $this->description,
@@ -38,7 +34,10 @@ class LeaderboardResource extends JsonResource
             'date_from'     => "",
             'date_to'       => "",
             'terms'         => "tesst terms anc condetions ",
-            'action'        => $actionDetails,
+            // 'action'        => $actionDetails, Leaderboard Records
+            'records'       => LeaderboardRecordsResource::collection(["1", '2', '3']), // top 10 ranking
+            'rewards'       => RewardResourceDummy::collection(["1", '2', '3']), // top 10 ranking
+            'current_user'  => new LeaderboardRecordsResource(["1"]), // 
             'key'           => 'testkey6635',
         ];
     }

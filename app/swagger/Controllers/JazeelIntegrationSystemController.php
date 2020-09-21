@@ -388,6 +388,15 @@
  *                 @OA\Property(property="date_from",   type="string"),
  *                 @OA\Property(property="date_to",   type="string"),
  *                 @OA\Property(property="terms",   type="string"),
+ *   @OA\Property(
+*       property="products",
+*       type="array",
+*       description="you musst be send to me json object {"reward_key":"TEST_KEY","rank":"1"}."
+*       @OA\Items(
+*               type="string",
+*               default="available"
+*           ),
+*    ),
  *                 @OA\Property(property="action_key",   type="string", description="optional if you want to make leaderboard for custom action."),
  *             )
  *         )

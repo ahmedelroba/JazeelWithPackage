@@ -658,6 +658,13 @@
                                     "terms": {
                                         "type": "string"
                                     },
+                                    "products": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "default": "available"
+                                        }
+                                    },
                                     "action_key": {
                                         "description": "optional if you want to make leaderboard for custom action.",
                                         "type": "string"

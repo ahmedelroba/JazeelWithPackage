@@ -1,6 +1,6 @@
 <?php
 
-namespace Uxbert\Gamification\Http\Resources\Sponsor;
+namespace Uxbert\Gamification\Http\Resources\RewardHistory;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;

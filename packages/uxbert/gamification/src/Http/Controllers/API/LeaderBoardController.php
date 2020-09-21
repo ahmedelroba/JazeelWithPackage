@@ -9,6 +9,8 @@ use Uxbert\Gamification\Http\Resources\Jazeel\StatusCollection;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardRecordsResource;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
 use Uxbert\Gamification\Models\LeaderBoard;
+use Uxbert\Gamification\Helpers\Helper;
+use Uxbert\Gamification\Models\Client;
 
 class LeaderBoardController extends Controller
 {
@@ -19,7 +21,13 @@ class LeaderBoardController extends Controller
      */
     public function index()
     {
-        return LeaderboardResource::collection(['1', '2', '3']);
+                    return LeaderboardResource::collection(["1", "2"]);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking)) {
+            $leaderboard = LeaderBoard::where('client_id', $checking->id)->get();
+            return LeaderboardResource::collection($leaderboard);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**
@@ -30,8 +38,11 @@ class LeaderBoardController extends Controller
      */
     public function search(Request $request)
     {
-        return LeaderboardResource::collection(['1', '2', '3']);
-
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking)) {
+            $leaderboard = LeaderBoard::where('client_id', $checking->id)->Where('name', 'LIKE', '%' . $request->name . '%')->get();
+            return LeaderboardResource::collection($leaderboard);
+        }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
@@ -44,7 +55,12 @@ class LeaderBoardController extends Controller
      */
     public function show(CreateLeaderboardRequest $request)
     {
-        return new LeaderboardResource(['1']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->leaderboard_key)) {
+            $reward = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+            return new LeaderboardResource($reward);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**
@@ -55,7 +71,28 @@ class LeaderBoardController extends Controller
      */
     public function store(CreateLeaderboardRequest $request)
     {
-        return new LeaderboardResource(['1']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking)) {
+            // JSON string
+            $rewards = '[
+                    {"rank":"1", "user_key":"male", "reward_key":"male"},
+                    {"rank":"2", "user_key":"male", "reward_key":"male"},
+                    {"rank":"3", "user_key":"male", "reward_key":"male"},
+                ]';
+            $random_key = Helper::unique_random('sponsors', 'key');
+            $reward = Reward::create([
+                'name'          => utf8_encode($request->name),
+                'description'   => utf8_encode($request->description),
+                'key'           => $random_key,
+                'date_from'     => $request->date_from,
+                'date_to'       => $request->date_to,
+                'terms'         => $request->terms,
+                'rewards'       => $rewards,
+                'client_id'     => $checking->id
+            ]);
+            return new RewardResource($reward);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**
