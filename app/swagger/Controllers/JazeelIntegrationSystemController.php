@@ -391,7 +391,7 @@
  *   @OA\Property(
 *       property="products",
 *       type="array",
-*       description="you musst be send to me json object {"reward_key":"TEST_KEY","rank":"1"}."
+*       description="you musst be send to me json object {'reward_key': '1', 'rank': '1'}.",
 *       @OA\Items(
 *               type="string",
 *               default="available"

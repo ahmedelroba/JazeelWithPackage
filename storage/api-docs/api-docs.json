@@ -659,6 +659,7 @@
                                         "type": "string"
                                     },
                                     "products": {
+                                        "description": "you musst be send to me json object {'reward_key': '1', 'rank': '1'}.",
                                         "type": "array",
                                         "items": {
                                             "type": "string",
