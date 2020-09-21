@@ -58,12 +58,12 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('users/get_leaderboards', 'LeaderBoardController@getLeaderboardsOfUser');
 
     Route::post('create_new_brand', 'JazeelApiController@create_new_brand');
-    Route::post('create_new_user', 'JazeelApiController@create_new_user');
+    Route::post('users/create', 'JazeelApiController@create_new_user');
     Route::post('add_new_brand_action', 'JazeelApiController@add_brand_action');
     Route::post('brand_actions_list', 'JazeelApiController@getting_all_brand_action');
-    Route::post('add_action_for_user', 'JazeelApiController@add_new_action_for_brand_user');
+    Route::post('users/add_point', 'JazeelApiController@add_new_action_for_brand_user');
     Route::post('show_all_points_of_user', 'JazeelApiController@show_user_points');
-    Route::post('show_all_points_of_user_history', 'JazeelApiController@show_user_points_history');
+    Route::post('users/actions_records', 'JazeelApiController@show_user_points_history');
     Route::post('top_users_have_points', 'JazeelApiController@top_users_have_points');
     Route::post('top_users_got_points', 'JazeelApiController@top_users_got_points');
     Route::post('top_users_by_brand_action', 'JazeelApiController@top_users_by_brand_action');
