@@ -127,7 +127,7 @@
                 ]
             }
         },
-        "/add_point": {
+        "/users/add_point": {
             "post": {
                 "tags": [
                     "Users"
@@ -275,7 +275,7 @@
                 ]
             }
         },
-        "/actions_records": {
+        "/users/actions_records": {
             "post": {
                 "tags": [
                     "Users"
@@ -347,7 +347,7 @@
                 ]
             }
         },
-        "/get_leaderboards": {
+        "/users/get_leaderboards": {
             "post": {
                 "tags": [
                     "Users"

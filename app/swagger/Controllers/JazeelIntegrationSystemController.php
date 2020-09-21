@@ -53,7 +53,7 @@
 
 /**
  * @OA\Post(
- *     path="/add_point",
+ *     path="/users/add_point",
  *     tags={"Users"},
  *     summary="Brands can add lot of actions for users for give them points and make users history.",
  *     operationId="add_point",
@@ -143,7 +143,7 @@
 
 /**
  * @OA\Post(
- *     path="/actions_records",
+ *     path="/users/actions_records",
  *     tags={"Users"},
  *     summary="Show all brand's users points history.",
  *     operationId="actions_records",
@@ -187,7 +187,7 @@
 
 /**
  * @OA\Post(
- *     path="/get_leaderboards",
+ *     path="/users/get_leaderboards",
  *     tags={"Users"},
  *     summary="Show all brand's users points history.",
  *     operationId="get_leaderboards",
