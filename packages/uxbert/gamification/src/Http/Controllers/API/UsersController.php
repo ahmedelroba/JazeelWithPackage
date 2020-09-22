@@ -21,6 +21,7 @@ use Uxbert\Gamification\Http\Resources\Jazeel\UserResource;
 use Uxbert\Gamification\Http\Resources\Jazeel\UserPointsResource;
 use Uxbert\Gamification\Http\Resources\Jazeel\UserPointsHistoryResource;
 use Uxbert\Gamification\Http\Resources\Jazeel\UserWithHistoryResource;
+use Uxbert\Gamification\Http\Resources\User\BalanceResource;
 
 // Models
 use App\User;
@@ -208,7 +209,7 @@ class UsersController extends Controller
         if (!empty($checking)) {
             $user = Client_User::where('referral_key', $request->user_referral_key)->first();
             if (!empty($user))
-                return new UserPointsResource($user);
+                return new BalanceResource($user);
             else
                 return (new StatusCollection(false, 'Please enter correct user_id.'))->response()->setStatusCode(401);
         }
