@@ -18,27 +18,19 @@ class LeaderboardResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return [
-        //     'name'          => $this->name,
-        //     'description'   => $this->description,
-        //     'date_from'     => $this->date_from,
-        //     'date_to'       => $this->date_to,
-        //     'terms'         => $this->terms,
-        //     'action'        => $actionDetails,
-        //     'key'           => $this->key,
-        // ];
-
+        $allRecords = LeaderBoardRecord::where('leaderboard_id', $this->id)->orderBy('rank')->limit(10)->get();
+        if ($request->user_referral_key != "");
+            $currentUserRecord = LeaderBoardRecord::where('user_id', $request->user_referral_key)->where('leaderboard_id', $this->id)->first();
         return [
-            'name'          => 'Test Leader board',
-            'description'   => 'Test Leaderboard description',
-            'date_from'     => "",
-            'date_to'       => "",
-            'terms'         => "tesst terms anc condetions ",
-            // 'action'        => $actionDetails, Leaderboard Records
-            'records'       => LeaderboardRecordsResource::collection(["1", '2', '3']), // top 10 ranking
-            'rewards'       => RewardResourceDummy::collection(["1", '2', '3']), // top 10 ranking
-            'current_user'  => new LeaderboardRecordsResource(["1"]), // 
-            'key'           => 'testkey6635',
+            'name'          => $this->name,
+            'description'   => $this->description,
+            'date_from'     => $this->date_from,
+            'date_to'       => $this->date_to,
+            'terms'         => $this->terms,
+            'key'           => $this->key,
+            'records'       => LeaderboardRecordsResource::collection($allRecords), // top 10 ranking
+            'rewards'       => json_decode ($this->rewards), 
+            'current_user'  => ($request->user_referral_key != "") ? new LeaderboardRecordsResource($currentUserRecord) : null, // 
         ];
     }
 }

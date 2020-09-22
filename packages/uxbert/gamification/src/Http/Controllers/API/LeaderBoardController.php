@@ -21,7 +21,7 @@ class LeaderBoardController extends Controller
      */
     public function index()
     {
-                    return LeaderboardResource::collection(["1", "2"]);
+        // return LeaderboardResource::collection(["1", "2"]);
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
             $leaderboard = LeaderBoard::where('client_id', $checking->id)->get();
@@ -53,7 +53,7 @@ class LeaderBoardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(CreateLeaderboardRequest $request)
+    public function find(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->leaderboard_key)) {
@@ -73,24 +73,29 @@ class LeaderBoardController extends Controller
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
-            // JSON string
-            $rewards = '[
-                    {"rank":"1", "user_key":"male", "reward_key":"male"},
-                    {"rank":"2", "user_key":"male", "reward_key":"male"},
-                    {"rank":"3", "user_key":"male", "reward_key":"male"},
-                ]';
-            $random_key = Helper::unique_random('sponsors', 'key');
-            $reward = Reward::create([
+
+            $rewards = explode(",", $request->reward_key);
+            $ranks = explode(",", $request->Rank);
+            if (count($rewards) != count($ranks))
+                return (new StatusCollection(false, 'Please make sure from rewards count must be equal ranks count.'))->response()->setStatusCode(401);
+
+            $rewardsJsonArray = array();
+            foreach($rewards as $key => $value) {
+                $rewardsJsonArray[] = array('reward_key' => $value, 'rank' => $ranks[$key]);
+            }
+            
+            $random_key = Helper::unique_random('leaderboards', 'key');
+            $leaderboard = LeaderBoard::create([
                 'name'          => utf8_encode($request->name),
                 'description'   => utf8_encode($request->description),
                 'key'           => $random_key,
                 'date_from'     => $request->date_from,
                 'date_to'       => $request->date_to,
                 'terms'         => $request->terms,
-                'rewards'       => $rewards,
+                'rewards'       => json_encode($rewardsJsonArray),
                 'client_id'     => $checking->id
             ]);
-            return new RewardResource($reward);
+            return new LeaderboardResource($leaderboard);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
@@ -126,5 +131,15 @@ class LeaderBoardController extends Controller
     public function getLeaderboardsOfUser()
     {
         return LeaderboardRecordsResource::collection(['1', '2', '3']);
+    }
+
+    /**
+     * This function for checking Client id and Client Secret.
+     *
+     * @param Request request
+     */
+    private function checkingClientIdAndSecret($request)
+    {
+        return Client::where('client_id', $request->client_id)->where('client_secret', $request->client_secret)->first();
     }
 }

@@ -734,8 +734,14 @@
                                     "terms": {
                                         "type": "string"
                                     },
-                                    "products": {
-                                        "description": "you musst be send to me json object {'reward_key': '1', 'rank': '1'}.",
+                                    "reward_key": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "default": "available"
+                                        }
+                                    },
+                                    "rank": {
                                         "type": "array",
                                         "items": {
                                             "type": "string",

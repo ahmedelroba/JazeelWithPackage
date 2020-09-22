@@ -434,9 +434,17 @@
  *                 @OA\Property(property="date_to",   type="string"),
  *                 @OA\Property(property="terms",   type="string"),
  *   @OA\Property(
-*       property="products",
+*       property="reward_key",
 *       type="array",
-*       description="you musst be send to me json object {'reward_key': '1', 'rank': '1'}.",
+*       @OA\Items(
+*               type="string",
+*               default="available"
+*           ),
+*    ),
+
+*  @OA\Property(
+*       property="rank",
+*       type="array",
 *       @OA\Items(
 *               type="string",
 *               default="available"
