@@ -214,4 +214,14 @@ class UsersController extends Controller
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
+
+    /**
+     * This function for checking Client id and Client Secret.
+     *
+     * @param Request request
+     */
+    private function checkingClientIdAndSecret($request)
+    {
+        return Client::where('client_id', $request->client_id)->where('client_secret', $request->client_secret)->first();
+    }
 }
