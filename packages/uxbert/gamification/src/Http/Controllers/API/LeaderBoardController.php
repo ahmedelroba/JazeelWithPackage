@@ -109,7 +109,30 @@ class LeaderBoardController extends Controller
      */
     public function update(CreateLeaderboardRequest $request)
     {
-        return new LeaderboardResource(['1']);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->leaderboard_key)) {
+            $leaderboard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+            
+            $rewards = explode(",", $request->reward_key);
+            $ranks = explode(",", $request->Rank);
+            if (count($rewards) != count($ranks))
+                return (new StatusCollection(false, 'Please make sure from rewards count must be equal ranks count.'))->response()->setStatusCode(401);
+
+            $rewardsJsonArray = array();
+            foreach($rewards as $key => $value) {
+                $rewardsJsonArray[] = array('reward_key' => $value, 'rank' => $ranks[$key]);
+            }
+
+            $leaderboard->name          = utf8_encode($request->name);
+            $leaderboard->description   = utf8_encode($request->description);
+            $leaderboard->date_from     = $request->date_from;
+            $leaderboard->date_to       = $request->date_to;
+            $leaderboard->rewards       = json_encode($rewardsJsonArray);
+            $leaderboard->terms         = $request->terms;
+            $leaderboard->save();
+            return new LeaderboardResource($leaderboard);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**
