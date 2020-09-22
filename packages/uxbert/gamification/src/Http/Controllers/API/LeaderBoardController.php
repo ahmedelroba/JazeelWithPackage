@@ -118,7 +118,7 @@ class LeaderBoardController extends Controller
             $leaderboard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
             
             $rewards = explode(",", $request->reward_key);
-            $ranks = explode(",", $request->Rank);
+            $ranks = explode(",", $request->rank);
             if (count($rewards) != count($ranks))
                 return (new StatusCollection(false, 'Please make sure from rewards count must be equal ranks count.'))->response()->setStatusCode(401);
 
@@ -126,7 +126,6 @@ class LeaderBoardController extends Controller
             foreach($rewards as $key => $value) {
                 $rewardsJsonArray[] = array('reward_key' => $value, 'rank' => $ranks[$key]);
             }
-            return $ranks;
 
             $leaderboard->name          = utf8_encode($request->name);
             $leaderboard->description   = utf8_encode($request->description);
