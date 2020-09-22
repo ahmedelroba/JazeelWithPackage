@@ -5,6 +5,7 @@ namespace Uxbert\Gamification\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Uxbert\Gamification\Http\Requests\API\Reward\CreateRewardRequest;
+use Uxbert\Gamification\Http\Requests\API\Reward\UpdateRewardRequest;
 use Uxbert\Gamification\Http\Resources\Jazeel\StatusCollection;
 use Uxbert\Gamification\Http\Resources\Reward\RewardResource;
 use Uxbert\Gamification\Models\Reward;
@@ -103,7 +104,7 @@ class RewardsController extends Controller
      * @param  \App\LeaderBoard  $leaderBoard
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateRewardRequest $request)
+    public function update(UpdateRewardRequest $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->reward_key)) {
