@@ -29,7 +29,7 @@ class UpdateRewardRequest extends FormRequest
             'name'          => 'required|max:254',
             'description'   => 'required',
             'sponsor_key'   => '',
-            'image'         => 'image',
+            // 'image'         => 'image',
             'quantity'        => 'required|numeric|min:0|max:99999999',
         ];
     }
