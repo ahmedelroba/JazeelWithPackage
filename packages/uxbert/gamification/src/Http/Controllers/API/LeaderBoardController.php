@@ -85,9 +85,7 @@ class LeaderBoardController extends Controller
 
             $rewardsJsonArray = array();
             foreach($rewards as $key => $value) {
-                $reward = Reward::where('key', $value)->first();
-                if (isset($reward->id))
-                    $rewardsJsonArray[] = array('reward_id' => $reward->id, 'rank' => $ranks[$key]);
+                $rewardsJsonArray[] = array('reward_key' => $value, 'rank' => $ranks[$key]);
             }
             
             $random_key = Helper::unique_random('leaderboards', 'key');
