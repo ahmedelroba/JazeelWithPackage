@@ -9,9 +9,11 @@ use Uxbert\Gamification\Http\Resources\Jazeel\StatusCollection;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardRecordsResource;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
 use Uxbert\Gamification\Models\LeaderBoard;
+use Uxbert\Gamification\Models\LeaderBoardRecord;
 use Uxbert\Gamification\Helpers\Helper;
 use Uxbert\Gamification\Models\Client;
 use Uxbert\Gamification\Models\Reward;
+use Uxbert\Gamification\Models\RewardsRecord;
 use Uxbert\Gamification\Models\Client_User;
 
 class LeaderBoardController extends Controller
@@ -77,7 +79,7 @@ class LeaderBoardController extends Controller
         if (!empty($checking)) {
 
             $rewards = explode(",", $request->reward_key);
-            $ranks = explode(",", $request->Rank);
+            $ranks = explode(",", $request->rank);
             if (count($rewards) != count($ranks))
                 return (new StatusCollection(false, 'Please make sure from rewards count must be equal ranks count.'))->response()->setStatusCode(401);
 
@@ -162,7 +164,9 @@ class LeaderBoardController extends Controller
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
-            $leaderBoard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+             $leaderBoard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+            if(empty($leaderBoard))
+                return (new StatusCollection(false, 'Please enter correct leaderboard_key.'))->response()->setStatusCode(401);
             $users = explode(",", $request->users_key);
             foreach($users as $key => $value){
                 $user = Client_User::where('referral_key', $value)->first();
@@ -176,7 +180,7 @@ class LeaderBoardController extends Controller
                 ]);
             }
 
-            $allRecords = LeaderBoardRecord::where(['leaderboard_id' => $leaderBoard->id, 'client_id' => $checking->id])->orderByAsc('points')->get();
+            $allRecords = LeaderBoardRecord::where(['leaderboard_id' => $leaderBoard->id, 'client_id' => $checking->id])->orderBy('points', 'desc', 'natural')->get();
             $rank = 1;
             foreach($allRecords as  $oneRecord){
                 $oneRecord->rank = $rank;
@@ -198,6 +202,26 @@ class LeaderBoardController extends Controller
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
             $leaderBoard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+            if(!empty($leaderBoard->rewards)) {
+                $rewards = json_decode($leaderBoard->rewards);
+                foreach($rewards as $value){
+                    $reward = Reward::where("key", '=', $value->reward_key)->first();
+
+                    RewardsRecord::create([
+                        'user_id' => , // We will fill it only when we send gift to winner
+                        'reward_id' => , // Reward
+                        'given_to' => , // (leaderboard/campaign/goals/missions/achievement)
+                        'leaderboard_rank' => $value->rank, // optional
+                        'leaderboard_id' =>  $leaderBoard->id, // optional
+                        'status' =>  'awarded', // awarded/pending/cacnelled/etc
+                        'given_at' => (new DateTime())->getTimestamp(), // date of given reward to user
+                    ]);
+                            
+
+                    
+                    // $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
+                }
+            } 
             return (new StatusCollection(true, 'We are closed leaderboard Successfully.'))->response()->setStatusCode(200);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
