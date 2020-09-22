@@ -63,7 +63,6 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     | Brands API Routes
     |--------------------------------------------------------------------------
     */
-    Route::post('users/get_leaderboards', 'LeaderBoardController@getLeaderboardsOfUser');
 
     Route::post('create_new_brand', 'JazeelApiController@create_new_brand');
     Route::post('add_new_brand_action', 'JazeelApiController@add_brand_action');
