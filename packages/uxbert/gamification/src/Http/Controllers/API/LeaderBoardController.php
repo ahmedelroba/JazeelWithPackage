@@ -207,15 +207,15 @@ class LeaderBoardController extends Controller
                 foreach($rewards as $value){
                     $reward = Reward::where("key", '=', $value->reward_key)->first();
 
-                    RewardsRecord::create([
-                        'user_id' => , // We will fill it only when we send gift to winner
-                        'reward_id' => , // Reward
-                        'given_to' => , // (leaderboard/campaign/goals/missions/achievement)
-                        'leaderboard_rank' => $value->rank, // optional
-                        'leaderboard_id' =>  $leaderBoard->id, // optional
-                        'status' =>  'awarded', // awarded/pending/cacnelled/etc
-                        'given_at' => (new DateTime())->getTimestamp(), // date of given reward to user
-                    ]);
+                    // RewardsRecord::create([
+                    //     'user_id' => , // We will fill it only when we send gift to winner
+                    //     'reward_id' => , // Reward
+                    //     'given_to' => , // (leaderboard/campaign/goals/missions/achievement)
+                    //     'leaderboard_rank' => $value->rank, // optional
+                    //     'leaderboard_id' =>  $leaderBoard->id, // optional
+                    //     'status' =>  'awarded', // awarded/pending/cacnelled/etc
+                    //     'given_at' => (new DateTime())->getTimestamp(), // date of given reward to user
+                    // ]);
                             
 
                     
