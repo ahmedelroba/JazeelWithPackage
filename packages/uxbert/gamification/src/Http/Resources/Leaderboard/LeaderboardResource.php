@@ -27,9 +27,8 @@ class LeaderboardResource extends JsonResource
         $rewardsJsonArray = array();
         if(!empty($this->rewards)) {
             $rewards = json_decode($this->rewards);
-            return $rewards;
             foreach($rewards as $value){
-                $reward = Reward::where("_id", '=', $value->reward_id)->first();
+                $reward = Reward::where("key", '=', $value->reward_key)->first();
                 $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
             }
         } 
