@@ -1061,14 +1061,14 @@
                                     "terms": {
                                         "type": "string"
                                     },
-                                    "reward_key": {
+                                    "reward_key[]": {
                                         "type": "array",
                                         "items": {
                                             "type": "string",
                                             "default": "available"
                                         }
                                     },
-                                    "rank": {
+                                    "rank[]": {
                                         "type": "array",
                                         "items": {
                                             "type": "string",

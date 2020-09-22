@@ -646,7 +646,7 @@
  *                 @OA\Property(property="date_to",   type="string"),
  *                 @OA\Property(property="terms",   type="string"),
  *   @OA\Property(
-*       property="reward_key",
+*       property="reward_key[]",
 *       type="array",
 *       @OA\Items(
 *               type="string",
@@ -655,7 +655,7 @@
 *    ),
 
 *  @OA\Property(
-*       property="rank",
+*       property="rank[]",
 *       type="array",
 *       @OA\Items(
 *               type="string",
