@@ -85,7 +85,18 @@ class JazeelApiController extends Controller
             'points' => '20000',
             'type' => 'plus',
         ]);
-
+        
+        $leaderboard = LeaderBoard::create([
+            'name'          => 'All Time Leaderboard',
+            'description'   => 'In this leaderboard we are listing all time ranking and points ',
+            'key'           => 'all_time',
+            'date_from'     => $request->date_from,
+            'date_to'       => $request->date_to,
+            'terms'         => $request->terms,
+            'rewards'       => json_encode($rewardsJsonArray),
+            'client_id'     => $checking->id
+        ]);
+        
         return (new BrandResource($client));
     }
 

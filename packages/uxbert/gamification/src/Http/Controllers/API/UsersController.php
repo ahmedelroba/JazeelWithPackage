@@ -31,6 +31,8 @@ use Uxbert\Gamification\Models\Action;
 use Uxbert\Gamification\Models\ActionRecord;
 use Uxbert\Gamification\Models\ClientPoints;
 use Uxbert\Gamification\Models\UserJoiningClient;
+use Uxbert\Gamification\Models\LeaderBoard;
+
 
 
 
