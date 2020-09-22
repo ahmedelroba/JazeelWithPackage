@@ -126,6 +126,7 @@ class LeaderBoardController extends Controller
             foreach($rewards as $key => $value) {
                 $rewardsJsonArray[] = array('reward_key' => $value, 'rank' => $ranks[$key]);
             }
+            return $rewardsJsonArray;
 
             $leaderboard->name          = utf8_encode($request->name);
             $leaderboard->description   = utf8_encode($request->description);
