@@ -7,6 +7,8 @@ use Uxbert\Gamification\Http\Resources\Jazeel\BrandActionResource;
 use Uxbert\Gamification\Models\Action;
 use Uxbert\Gamification\Models\LeaderBoardRecord;
 use Uxbert\Gamification\Http\Resources\Reward\RewardResourceDummy;
+use Uxbert\Gamification\Http\Resources\Reward\RewardResource;
+use Uxbert\Gamification\Models\Reward;
 
 class LeaderboardResource extends JsonResource
 {
@@ -21,6 +23,16 @@ class LeaderboardResource extends JsonResource
         $allRecords = LeaderBoardRecord::where('leaderboard_id', $this->id)->orderBy('rank')->limit(10)->get();
         if ($request->user_referral_key != "");
             $currentUserRecord = LeaderBoardRecord::where('user_id', $request->user_referral_key)->where('leaderboard_id', $this->id)->first();
+        
+        $rewardsJsonArray = array();
+        if(!empty($this->rewards)) {
+            $rewards = json_decode($this->rewards);
+            foreach($rewards as $key => $value){
+                $reward = Reward::where("_id", '=', $value->reward_id)->first();
+                $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
+            }
+        } 
+
         return [
             'name'          => $this->name,
             'description'   => $this->description,
@@ -29,7 +41,7 @@ class LeaderboardResource extends JsonResource
             'terms'         => $this->terms,
             'key'           => $this->key,
             'records'       => LeaderboardRecordsResource::collection($allRecords), // top 10 ranking
-            'rewards'       => json_decode ($this->rewards), 
+            'rewards'       => $rewardsJsonArray, 
             'current_user'  => ($request->user_referral_key != "") ? new LeaderboardRecordsResource($currentUserRecord) : null, // 
         ];
     }

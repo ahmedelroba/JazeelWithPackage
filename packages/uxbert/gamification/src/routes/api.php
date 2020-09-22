@@ -7,7 +7,8 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('update', 'LeaderBoardController@update');
     Route::post('delete', 'LeaderBoardController@destroy');
     Route::post('list', 'LeaderBoardController@index');
-    Route::post('get_users_of', 'LeaderBoardController@getUsersOfLeaderboard');
+    // Route::post('get_users_of_leaderboard', 'LeaderBoardController@getUsersOfLeaderboard');
+    Route::post('get_leaderboards_of_users', 'LeaderBoardController@getLeaderboardsOfUser');
     Route::post('find', 'LeaderBoardController@find');
     Route::post('search', 'LeaderBoardController@search');
 });

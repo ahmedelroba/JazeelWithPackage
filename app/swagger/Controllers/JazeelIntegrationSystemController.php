@@ -627,6 +627,51 @@
 
 /**
  * @OA\Post(
+ *     path="/leaderboard/get_leaderboards_of_users",
+ *     tags={"Leaderboard"},
+ *     summary="Get all Users in leaderboards.",
+ *     operationId="listUsersLeaderboard",
+ *      @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/x-www-form-urlencoded",
+ *             @OA\Schema(
+ *                 @OA\Property(property="client_id",       type="string", description="Unique brand id."),
+ *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
+ *                 @OA\Property(property="user_referral_key",  type="string"),
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Validation error",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Cutom error message",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     security={
+ *         {"petstore_auth": {"write:pets", "read:pets"}}
+ *     },
+ * )
+ */
+
+
+
+/**
+ * @OA\Post(
  *     path="/leaderboard/find",
  *     tags={"Leaderboard"},
  *     summary="Get details of leaderboard.",

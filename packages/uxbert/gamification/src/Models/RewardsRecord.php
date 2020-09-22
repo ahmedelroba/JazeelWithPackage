@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class RewardsRecord extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'rewards';
+    protected $collection = 'reward_records';
 
     protected $fillable = [
         'user_id', // We will fill it only when we send gift to winner

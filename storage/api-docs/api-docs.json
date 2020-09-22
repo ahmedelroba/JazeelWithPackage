@@ -1032,6 +1032,77 @@
                 ]
             }
         },
+        "/leaderboard/get_leaderboards_of_users": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Get all Users in leaderboards.",
+                "operationId": "listUsersLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "user_referral_key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
         "/leaderboard/find": {
             "post": {
                 "tags": [

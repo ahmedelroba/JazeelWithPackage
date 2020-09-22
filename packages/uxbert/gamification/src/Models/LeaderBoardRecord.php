@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class LeaderBoardRecord extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'leaderboards';
+    protected $collection = 'leaderboard_records';
 
     protected $fillable = [
         'user_name', 'points', 'rank', 'user_id', 'leaderboard_id', 'client_id'
