@@ -22,6 +22,7 @@ use Uxbert\Gamification\Http\Resources\Jazeel\UserPointsResource;
 use Uxbert\Gamification\Http\Resources\Jazeel\UserPointsHistoryResource;
 use Uxbert\Gamification\Http\Resources\Jazeel\UserWithHistoryResource;
 use Uxbert\Gamification\Http\Resources\User\BalanceResource;
+use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
 
 // Models
 use App\User;
