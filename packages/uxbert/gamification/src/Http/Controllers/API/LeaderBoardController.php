@@ -134,7 +134,6 @@ class LeaderBoardController extends Controller
             $leaderboard->rewards       = json_encode($rewardsJsonArray);
             $leaderboard->terms         = $request->terms;
             $leaderboard->save();
-            return $leaderboard;
             return new LeaderboardResource($leaderboard);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
