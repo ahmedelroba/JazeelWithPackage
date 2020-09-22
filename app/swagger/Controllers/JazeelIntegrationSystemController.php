@@ -321,6 +321,7 @@
 
 
 
+
 /**
  * @OA\Post(
  *     path="/top_users_have_points",
@@ -508,6 +509,60 @@
 
 /**
  * @OA\Post(
+ *     path="/leaderboard/fake_records",
+ *     tags={"Leaderboard"},
+ *     summary="Add Fack Records leaderboards.",
+ *     operationId="fakeRecordsLeaderboard",
+ *      @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/x-www-form-urlencoded",
+ *             @OA\Schema(
+ *                 @OA\Property(property="client_id",       type="string", description="Unique brand id."),
+ *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
+ *                 @OA\Property(property="leaderboard_key",  type="string"),
+*   @OA\Property(
+*       property="users_key",
+*       type="array",
+*       @OA\Items(
+*               type="string",
+*               default="available"
+*           ),
+*    ),
+
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Validation error",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Cutom error message",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     security={
+ *         {"petstore_auth": {"write:pets", "read:pets"}}
+ *     },
+ * )
+ */
+
+
+
+/**
+ * @OA\Post(
  *     path="/leaderboard/create",
  *     tags={"Leaderboard"},
  *     summary="Create Leaderboard.",
@@ -585,13 +640,30 @@
  *             @OA\Schema(
  *                 @OA\Property(property="client_id",       type="string", description="Unique brand id."),
  *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
+ *                 @OA\Property(property="name",   type="string"),
+ *                 @OA\Property(property="description",   type="string"),
+ *                 @OA\Property(property="date_from",   type="string"),
+ *                 @OA\Property(property="date_to",   type="string"),
+ *                 @OA\Property(property="terms",   type="string"),
+ *   @OA\Property(
+*       property="reward_key",
+*       type="array",
+*       @OA\Items(
+*               type="string",
+*               default="available"
+*           ),
+*    ),
+
+*  @OA\Property(
+*       property="rank",
+*       type="array",
+*       @OA\Items(
+*               type="string",
+*               default="available"
+*           ),
+*    ),
+ *                 @OA\Property(property="action_key",   type="string", description="optional if you want to make leaderboard for custom action."),
  *                 @OA\Property(property="leaderboard_key",  type="string"),
- *                 @OA\Property(property="name",            type="string"),
- *                 @OA\Property(property="description",     type="string"),
- *                 @OA\Property(property="date_from",       type="string"),
- *                 @OA\Property(property="date_to",         type="string"),
- *                 @OA\Property(property="terms",           type="string"),
- *                 @OA\Property(property="action_key",      type="string", description="optional if you want to make leaderboard for custom action."),
  *             )
  *         )
  *     ),

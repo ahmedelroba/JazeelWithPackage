@@ -158,10 +158,47 @@ class LeaderBoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function addFackRecords(Request $request)
+    {
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking)) {
+            $leaderBoard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+            $users = explode(",", $request->users_key);
+            foreach($users as $key => $value){
+                $user = Client_User::where('referral_key', $value)->first();
+                $record = LeaderBoardRecord::create([
+                    'user_name' => $user->first_name . ' ' . $user->last_name, 
+                    'points' => rand(1, 9999), 
+                    'rank' => rand(1, 9999), 
+                    'user_id' => $user->id, 
+                    'leaderboard_id' => $leaderBoard->id, 
+                    'client_id' => $checking->id
+                ]);
+            }
+
+            $allRecords = LeaderBoardRecord::where(['leaderboard_id' => $leaderBoard->id, 'client_id' => $checking->id])->orderByAsc('points')->get();
+            $rank = 1;
+            foreach($allRecords as  $oneRecord){
+                $oneRecord->rank = $rank;
+                $oneRecord->save();
+                $rank = $rank + 1;
+            }
+            return (new StatusCollection(true, 'We are added fake data.'))->response()->setStatusCode(200);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function closeLeaderboards()
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
+            $leaderBoard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+            return (new StatusCollection(true, 'We are closed leaderboard Successfully.'))->response()->setStatusCode(200);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }

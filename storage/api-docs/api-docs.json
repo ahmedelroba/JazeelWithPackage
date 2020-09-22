@@ -847,6 +847,84 @@
                 ]
             }
         },
+        "/leaderboard/fake_records": {
+            "post": {
+                "tags": [
+                    "Leaderboard"
+                ],
+                "summary": "Add Fack Records leaderboards.",
+                "operationId": "fakeRecordsLeaderboard",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "client_id": {
+                                        "description": "Unique brand id.",
+                                        "type": "string"
+                                    },
+                                    "client_secret": {
+                                        "description": "Unique brand secret.",
+                                        "type": "string"
+                                    },
+                                    "leaderboard_key": {
+                                        "type": "string"
+                                    },
+                                    "users_key": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "default": "available"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Cutom error message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
         "/leaderboard/create": {
             "post": {
                 "tags": [
@@ -968,9 +1046,6 @@
                                         "description": "Unique brand secret.",
                                         "type": "string"
                                     },
-                                    "leaderboard_key": {
-                                        "type": "string"
-                                    },
                                     "name": {
                                         "type": "string"
                                     },
@@ -986,8 +1061,25 @@
                                     "terms": {
                                         "type": "string"
                                     },
+                                    "reward_key": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "default": "available"
+                                        }
+                                    },
+                                    "rank": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "default": "available"
+                                        }
+                                    },
                                     "action_key": {
                                         "description": "optional if you want to make leaderboard for custom action.",
+                                        "type": "string"
+                                    },
+                                    "leaderboard_key": {
                                         "type": "string"
                                     }
                                 },
