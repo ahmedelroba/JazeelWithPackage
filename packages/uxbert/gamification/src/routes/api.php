@@ -48,10 +48,12 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
 });
 
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/users', 'middleware' => 'api'], function () {
-    Route::post('add_point', 'JazeelApiController@add_new_action_for_brand_user');
-    Route::post('actions_records', 'JazeelApiController@show_user_points_history');
-    Route::post('create', 'JazeelApiController@create_new_user');
-    Route::post('get_leaderboards', 'LeaderBoardController@index');
+    Route::post('create',           'UsersController@create_new_user');
+    Route::post('add_point',        'UsersController@add_points');
+    Route::post('actions_records',  'UsersController@action_records');
+    Route::post('get_leaderboards', 'UsersController@getLeaderboards');
+    Route::post('find_leaderboard', 'UsersController@findLeaderboard');
+    Route::post('get_balance',      'UsersController@getBalance');
 });
 
 

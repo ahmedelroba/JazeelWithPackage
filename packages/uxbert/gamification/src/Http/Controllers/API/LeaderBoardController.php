@@ -150,28 +150,7 @@ class LeaderBoardController extends Controller
         return (new StatusCollection(true, 'You are deleted leaderboard successfully.'))->response()->setStatusCode(200);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getLeaderboardsOfUser(Request $request)
-    {
-        $checking = $this->checkingClientIdAndSecret($request);
-        if (!empty($checking)) {
-            $user = Client_User::where('referral_key', $request->user_referral_key)->first();
-            if(empty($user))
-                return (new StatusCollection(false, 'Please enter correct user_referral_key.'))->response()->setStatusCode(401);
-
-            $leaderboard = LeaderBoard::where('client_id', $checking->id)->whereHas('records', function($q) use($user) {
-                $q->where('user_id', '=', $user->id);
-            })->get();
-            return LeaderboardResource::collection($leaderboard);
-        }
-        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
-
-        return LeaderboardRecordsResource::collection(['1', '2', '3']);
-    }
+    
 
 
     /**
