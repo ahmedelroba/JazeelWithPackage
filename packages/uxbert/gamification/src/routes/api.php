@@ -1,7 +1,5 @@
 <?php
 
-
-
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/leaderboard', 'middleware' => 'api'], function () {
     Route::post('create', 'LeaderBoardController@store');
     Route::post('update', 'LeaderBoardController@update');
@@ -73,6 +71,4 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('top_users_have_points', 'JazeelApiController@top_users_have_points');
     Route::post('top_users_got_points', 'JazeelApiController@top_users_got_points');
     Route::post('top_users_by_brand_action', 'JazeelApiController@top_users_by_brand_action');
-
-
 });
