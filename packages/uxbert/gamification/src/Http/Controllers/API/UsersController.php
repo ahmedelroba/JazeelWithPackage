@@ -231,9 +231,10 @@ class UsersController extends Controller
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->leaderboard_key)) {
             $user = Client_User::where('referral_key', $request->user_referral_key)->first();
-            $leaderboard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->whereHas('records', function($q) use ($user) {
-                $q->where('user_id', '=', $user->id);
-            })->first();
+            $leaderboard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)
+                                        ->whereHas('records', function($q) use ($user) {
+                                            $q->where('user_id', '=', $user->id);
+                                        })->first();
             if (!$leaderboard)
                 return (new StatusCollection(false, 'This user is not joined in this leaderboard.'))->response()->setStatusCode(401);
             return new LeaderboardResource($leaderboard);

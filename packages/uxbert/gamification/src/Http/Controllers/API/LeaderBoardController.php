@@ -148,7 +148,7 @@ class LeaderBoardController extends Controller
     public function destroy(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
-        if (!empty($checking) && !empty($request->action_key)) {
+        if (!empty($checking) && !empty($request->leaderboard_key)) {
             $leaderboard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
             $leaderboard->delete();
             return (new StatusCollection(true, 'You are deleted leaderboard successfully.'))->response()->setStatusCode(200);

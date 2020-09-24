@@ -140,7 +140,7 @@ class RewardsController extends Controller
     public function destroy(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
-        if (!empty($checking) && !empty($request->action_key)) {
+        if (!empty($checking) && !empty($request->reward_key)) {
             $reward = Reward::where('client_id', $checking->id)->where('key', $request->reward_key)->first();
             $reward->delete();
             return (new StatusCollection(true, 'You are deleted Reward successfully.'))->response()->setStatusCode(200);
