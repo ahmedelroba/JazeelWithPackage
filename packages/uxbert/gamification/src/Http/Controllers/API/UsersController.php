@@ -234,7 +234,7 @@ class UsersController extends Controller
             $leaderboard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->whereHas('records', function($q) use($user) {
                 $q->where('user_id', '=', $user->id);
             })->first();
-            return new LeaderboardResource($reward);
+            return new LeaderboardResource($leaderboard);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
