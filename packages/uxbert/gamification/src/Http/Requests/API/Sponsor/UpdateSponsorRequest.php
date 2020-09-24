@@ -27,7 +27,7 @@ class UpdateSponsorRequest extends FormRequest
             'client_id'     => 'required',
             'client_secret' => 'required',
             'name'          => 'required|max:254',
-            'logo'          => 'required|file',
+            // 'logo'          => 'required|file',
             'description'   => 'required',
             'status'        => 'required|boolean',
         ];
