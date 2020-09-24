@@ -519,8 +519,8 @@
                                         "description": "Brand's user referral key, it saved in jazeel when user created.",
                                         "type": "string"
                                     },
-                                    "status": {
-                                        "description": "Leaderboard status ['all' -  'active' - 'inactive'].",
+                                    "leaderboard_key": {
+                                        "description": "Leaderboard key.",
                                         "type": "string"
                                     }
                                 },
