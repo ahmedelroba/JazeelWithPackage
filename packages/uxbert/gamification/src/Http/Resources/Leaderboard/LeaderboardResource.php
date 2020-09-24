@@ -9,6 +9,8 @@ use Uxbert\Gamification\Models\LeaderBoardRecord;
 use Uxbert\Gamification\Http\Resources\Reward\RewardResourceDummy;
 use Uxbert\Gamification\Http\Resources\Reward\RewardResource;
 use Uxbert\Gamification\Models\Reward;
+use Uxbert\Gamification\Models\Client_User;
+
 
 class LeaderboardResource extends JsonResource
 {
@@ -20,10 +22,14 @@ class LeaderboardResource extends JsonResource
      */
     public function toArray($request)
     {
-        $allRecords = LeaderBoardRecord::where('leaderboard_id', $this->id)->orderBy('rank')->limit(10)->get();
-        if ($request->user_referral_key != "");
-            $currentUserRecord = LeaderBoardRecord::where('user_id', $request->user_referral_key)->where('leaderboard_id', $this->id)->first();
-        
+        $allRecords = LeaderBoardRecord::where('leaderboard_id', $this->id)->orderBy('rank')->limit(5)->get();
+        if ($request->user_referral_key != ""){
+            $user = Client_User::where('referral_key', $request->user_referral_key)->first();
+            if (!$user)
+                return [];
+                $currentUserRecord = LeaderBoardRecord::where('user_id', $user->id)->where('leaderboard_id', $this->id)->first();
+                $last5Records = LeaderBoardRecord::where('leaderboard_id', $this->id)->where('rank', '>', $currentUserRecord->rank)->orderBy('rank')->limit(5)->get();
+        }
         $rewardsJsonArray = array();
         if(!empty($this->rewards)) {
             $rewards = json_decode($this->rewards);
@@ -40,9 +46,10 @@ class LeaderboardResource extends JsonResource
             'date_to'       => $this->date_to,
             'terms'         => $this->terms,
             'key'           => $this->key,
-            'records'       => LeaderboardRecordsResource::collection($allRecords), // top 10 ranking
+            'records'       => LeaderboardRecordsResource::collection($allRecords), // top 5 ranking
+            'last_5_records'=> LeaderboardRecordsResource::collection($last5Records), // last 5 ranking
             'rewards'       => $rewardsJsonArray, 
-            'current_user'  => ($request->user_referral_key != "") ? new LeaderboardRecordsResource($currentUserRecord) : null, // 
+            'current_user'  =>  new LeaderboardRecordsResource($currentUserRecord), // 
         ];
     }
 }
