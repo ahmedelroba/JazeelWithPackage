@@ -4,9 +4,12 @@ namespace Uxbert\Gamification\Models;
 
 use App\User;
 use Jenssegers\Mongodb\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 
 class Client_User extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     public $timestamps = TRUE;
 
     protected $connection = 'mongodb';

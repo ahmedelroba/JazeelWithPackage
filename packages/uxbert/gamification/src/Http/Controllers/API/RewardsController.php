@@ -139,7 +139,13 @@ class RewardsController extends Controller
      */
     public function destroy(Request $request)
     {
-        return (new StatusCollection(true, 'You are deleted leaderboard successfully.'))->response()->setStatusCode(200);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->action_key)) {
+            $reward = Reward::where('client_id', $checking->id)->where('key', $request->reward_key)->first();
+            $reward->delete();
+            return (new StatusCollection(true, 'You are deleted Reward successfully.'))->response()->setStatusCode(200);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     /**

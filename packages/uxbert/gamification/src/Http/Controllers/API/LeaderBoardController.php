@@ -147,7 +147,13 @@ class LeaderBoardController extends Controller
      */
     public function destroy(Request $request)
     {
-        return (new StatusCollection(true, 'You are deleted leaderboard successfully.'))->response()->setStatusCode(200);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->action_key)) {
+            $leaderboard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+            $leaderboard->delete();
+            return (new StatusCollection(true, 'You are deleted leaderboard successfully.'))->response()->setStatusCode(200);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
     
@@ -168,14 +174,15 @@ class LeaderBoardController extends Controller
             $users = explode(",", $request->users_email);
             foreach($users as $key => $value){
                 $user = Client_User::where('email', $value)->first();
-                $record = LeaderBoardRecord::create([
-                    'user_name' => $user->first_name . ' ' . $user->last_name, 
-                    'points' => rand(1, 9999), 
-                    'rank' => rand(1, 9999), 
-                    'user_id' => $user->id, 
-                    'leaderboard_id' => $leaderBoard->id, 
-                    'client_id' => $checking->id
-                ]);
+                if($user)
+                    $record = LeaderBoardRecord::create([
+                        'user_name' => $user->first_name . ' ' . $user->last_name, 
+                        'points' => rand(1, 9999), 
+                        'rank' => rand(1, 9999), 
+                        'user_id' => $user->id, 
+                        'leaderboard_id' => $leaderBoard->id, 
+                        'client_id' => $checking->id
+                    ]);
             }
 
             $allRecords = LeaderBoardRecord::where(['leaderboard_id' => $leaderBoard->id, 'client_id' => $checking->id])->orderBy('points', 'desc', 'natural')->get();

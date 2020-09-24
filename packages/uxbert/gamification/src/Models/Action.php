@@ -3,11 +3,15 @@
 namespace Uxbert\Gamification\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 
 class Action extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $connection = 'mongodb';
     protected $collection = 'actions';
+    
 
     protected $fillable = [
         'name', 'description', 'key', 'points', 'type', 'status', 'client_id', 'category_id'

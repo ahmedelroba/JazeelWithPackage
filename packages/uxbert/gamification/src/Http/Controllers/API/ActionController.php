@@ -133,8 +133,9 @@ class ActionController extends Controller
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->action_key)) {
-
-            return (new StatusCollection(true, 'You are added new action successfully.'))->response()->setStatusCode(200);
+            $action = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
+            $action->delete();
+            return (new StatusCollection(true, 'You are deleted action successfully.'))->response()->setStatusCode(200);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }

@@ -103,7 +103,7 @@ class SponsersController extends Controller
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->sponsor_key)) {
-             $sponsor = Sponsor::where('client_id', $checking->id)->where('key', $request->sponsor_key)->first();
+            $sponsor = Sponsor::where('client_id', $checking->id)->where('key', $request->sponsor_key)->first();
             $fileInputName = 'logo';
             $fileMedia = null;
             if ($request->hasFile($fileInputName))
@@ -127,7 +127,14 @@ class SponsersController extends Controller
      */
     public function destroy(Request $request)
     {
-        return (new StatusCollection(true, 'You are deleted leaderboard successfully.'))->response()->setStatusCode(200);
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->action_key)) {
+            $sponsor = Sponsor::where('client_id', $checking->id)->where('key', $request->sponsor_key)->first();
+            $sponsor->delete();
+            return (new StatusCollection(true, 'You are deleted Sponsor successfully.'))->response()->setStatusCode(200);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
+
     }
 
     /**
