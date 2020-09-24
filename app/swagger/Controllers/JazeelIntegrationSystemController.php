@@ -521,7 +521,7 @@
  *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
  *                 @OA\Property(property="leaderboard_key",  type="string"),
 *   @OA\Property(
-*       property="users_key",
+*       property="users_email",
 *       type="array",
 *       @OA\Items(
 *               type="string",
