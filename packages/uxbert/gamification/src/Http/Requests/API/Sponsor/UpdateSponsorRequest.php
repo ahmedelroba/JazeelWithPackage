@@ -4,7 +4,7 @@ namespace Uxbert\Gamification\Http\Requests\API\Sponsor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateSponsorRequest extends FormRequest
+class UpdateSponsorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

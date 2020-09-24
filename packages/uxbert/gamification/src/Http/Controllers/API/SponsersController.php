@@ -5,6 +5,7 @@ namespace Uxbert\Gamification\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Uxbert\Gamification\Http\Requests\API\Sponsor\CreateSponsorRequest;
+use Uxbert\Gamification\Http\Requests\API\Sponsor\UpdateSponsorRequest;
 use Uxbert\Gamification\Http\Resources\Jazeel\StatusCollection;
 use Uxbert\Gamification\Http\Resources\Sponsor\SponsorResource;
 use Uxbert\Gamification\Models\Sponsor;
@@ -98,7 +99,7 @@ class SponsersController extends Controller
      * @param  \App\LeaderBoard  $leaderBoard
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateSponsorRequest $request)
+    public function update(UpdateSponsorRequest $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->sponsor_key)) {
