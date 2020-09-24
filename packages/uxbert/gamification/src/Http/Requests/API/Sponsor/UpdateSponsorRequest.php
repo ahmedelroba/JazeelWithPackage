@@ -29,7 +29,7 @@ class UpdateSponsorRequest extends FormRequest
             'name'          => 'required|max:254',
             // 'logo'          => 'required|file',
             'description'   => 'required',
-            'status'        => 'required|boolean',
+            'status'        => 'boolean',
         ];
     }
 }
