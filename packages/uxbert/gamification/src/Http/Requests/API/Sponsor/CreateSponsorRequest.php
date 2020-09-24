@@ -26,9 +26,9 @@ class CreateSponsorRequest extends FormRequest
         return [
             'client_id'     => 'required',
             'client_secret' => 'required',
-            'name'          => 'required|max:254',
-            'logo'          => 'required|file',
-            'description'   => 'required',
+            // 'name'          => 'required|max:254',
+            // 'logo'          => 'required|file',
+            // 'description'   => 'required',
             // 'status'        => 'boolean',
         ];
     }
