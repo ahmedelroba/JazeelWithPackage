@@ -167,7 +167,7 @@ class LeaderBoardController extends Controller
                 return (new StatusCollection(false, 'Please enter correct leaderboard_key.'))->response()->setStatusCode(401);
             $users = explode(",", $request->users_key);
             foreach($users as $key => $value){
-                $user = Client_User::where('referral_key', $value)->first();
+                $user = Client_User::where('email', $value)->first();
                 $record = LeaderBoardRecord::create([
                     'user_name' => $user->first_name . ' ' . $user->last_name, 
                     'points' => rand(1, 9999), 
