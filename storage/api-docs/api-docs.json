@@ -870,7 +870,7 @@
                                     "leaderboard_key": {
                                         "type": "string"
                                     },
-                                    "users_key": {
+                                    "users_email": {
                                         "type": "array",
                                         "items": {
                                             "type": "string",
