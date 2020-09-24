@@ -219,6 +219,26 @@ class UsersController extends Controller
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
+
+    /**
+     * Show a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function findLeaderboard(Request $request)
+    {
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking) && !empty($request->leaderboard_key)) {
+            $user   = Client_User::where('referral_key', $request->user_referral_key)->first();
+            $leaderboard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->whereHas('records', function($q) use($user) {
+                $q->where('user_id', '=', $user->id);
+            })->first();
+            return new LeaderboardResource($reward);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
+    }
+
     /**
      * This function for checking Client id and Client Secret.
      *

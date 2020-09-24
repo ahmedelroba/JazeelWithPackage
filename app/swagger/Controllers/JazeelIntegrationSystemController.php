@@ -288,7 +288,7 @@
  *                 @OA\Property(property="client_id",       type="string", description="Unique brand id."),
  *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
  *                 @OA\Property(property="user_referral_key",         type="string", description="Brand's user referral key, it saved in jazeel when user created."),
- *                 @OA\Property(property="status",         type="string", description="Leaderboard status ['all' -  'active' - 'inactive']."),
+ *                 @OA\Property(property="leaderboard_key",         type="string", description="Leaderboard key."),
  *             )
  *         )
  *     ),

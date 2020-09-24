@@ -165,7 +165,7 @@ class LeaderBoardController extends Controller
              $leaderBoard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
             if(empty($leaderBoard))
                 return (new StatusCollection(false, 'Please enter correct leaderboard_key.'))->response()->setStatusCode(401);
-            $users = explode(",", $request->users_key);
+            $users = explode(",", $request->users_email);
             foreach($users as $key => $value){
                 $user = Client_User::where('email', $value)->first();
                 $record = LeaderBoardRecord::create([
