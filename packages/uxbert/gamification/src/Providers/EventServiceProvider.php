@@ -7,6 +7,7 @@ use Uxbert\Gamification\Events\ActionRegistered;
 use Uxbert\Gamification\Listeners\UpdateActionPoints;
 use Uxbert\Gamification\Listeners\UpdateLeaderboards;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 
 class EventServiceProvider extends ServiceProvider
 {

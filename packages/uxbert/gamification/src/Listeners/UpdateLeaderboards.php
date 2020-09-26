@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Uxbert\Gamification\Models\LeaderBoard;
 use Uxbert\Gamification\Models\LeaderBoardRecord;
 use Illuminate\Support\Facades\Log;
+  use Illuminate\Support\Facades\Redis;
 
 class UpdateLeaderboards implements ShouldQueue
 {
