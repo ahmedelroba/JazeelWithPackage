@@ -98,8 +98,11 @@ class ActionController extends Controller
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->action_key)) {
-            $actions = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
-            return new ActionResource($actions);
+            $action = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
+            if($action)
+                return ActionResource::collection($action);
+            else
+                return (new StatusCollection(false, 'Please enter correct action_key.'))->response()->setStatusCode(401);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
