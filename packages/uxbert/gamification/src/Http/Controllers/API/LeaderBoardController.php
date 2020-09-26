@@ -8,6 +8,8 @@ use Uxbert\Gamification\Http\Requests\API\Leaderboard\CreateLeaderboardRequest;
 use Uxbert\Gamification\Http\Resources\Jazeel\StatusCollection;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardRecordsResource;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
+use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardWithWinnersResource;
+
 use Uxbert\Gamification\Models\LeaderBoard;
 use Uxbert\Gamification\Models\LeaderBoardRecord;
 use Uxbert\Gamification\Helpers\Helper;
@@ -62,7 +64,7 @@ class LeaderBoardController extends Controller
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->leaderboard_key)) {
             $reward = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
-            return new LeaderboardResource($reward);
+            return new LeaderboardWithWinnersResource($reward);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }

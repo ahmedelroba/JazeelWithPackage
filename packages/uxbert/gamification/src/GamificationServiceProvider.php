@@ -10,7 +10,7 @@ use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Artisan;
 use Uxbert\Gamification\Http\Middleware\VerifyCsrfToken;
 use Uxbert\Gamification\Http\Middleware\SetAPILocaleMiddleware;
-
+use Uxbert\Gamification\Providers\EventServiceProvider;
 
 class GamificationServiceProvider extends ServiceProvider
 {
@@ -22,6 +22,7 @@ class GamificationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
     }
 
     /**

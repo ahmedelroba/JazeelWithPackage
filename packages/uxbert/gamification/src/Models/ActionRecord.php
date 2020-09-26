@@ -4,6 +4,7 @@ namespace Uxbert\Gamification\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+use Uxbert\Gamification\Events\ActionRegistered;
 
 class ActionRecord extends Model
 {
@@ -13,7 +14,14 @@ class ActionRecord extends Model
     protected $collection = 'action_records';
 
     protected $fillable = [
-        'user_id', 'action_id', 'client_id', 'current_points', 'type', 'description', 'category_id'
+        'user_id', 
+        'action_id', 
+        'client_id', 
+        'current_points', 
+        'type', 
+        'description', 
+        'category_id',
+        'element', // event name/groub name/etc
     ];
 
     public function user()
@@ -31,9 +39,9 @@ class ActionRecord extends Model
         return $this->belongsTo(Client::class, 'client_id' , '_id');
     }
 
-
-
-
-
+    // add events here to be fired automatically on actions
+    protected $dispatchesEvents = [
+        'saved' => ActionRegistered::class,
+    ];
 
 }

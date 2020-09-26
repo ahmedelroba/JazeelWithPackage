@@ -5,6 +5,8 @@ namespace Uxbert\Gamification\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+
 
 use Uxbert\Gamification\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -119,6 +121,7 @@ class UsersController extends Controller
      */
     public function add_points(AddNewBrandUserActionRequest $request)
     {
+        Log::info('Add Points FUNCTION: ');
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
             $action = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
