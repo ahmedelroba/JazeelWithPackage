@@ -19,7 +19,7 @@ class BalanceResource extends JsonResource
      */
     public function toArray($request)
     {
-        // $leaderboard = LeaderBoard::where('key', '')
+        // $leaderboard = LeaderBoard::where('key', 'all')->first();
         // $rankOfAllTimeLeaderboard = LeaderBoardRecord::
         return [
             "points" => $this->total_earned_points,

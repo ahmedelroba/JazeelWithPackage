@@ -14,7 +14,10 @@ class Action extends Model
     
 
     protected $fillable = [
-        'name', 'description', 'key', 'points', 'type', 'status', 'client_id', 'category_id', 
+        'name', 'description', 'key', 'points', 'type', 'status', 'client_id', 'category_id',
+        'action_frequency',
+        'start_date',
+        'end_date',
     ];
 
     public function transactions()

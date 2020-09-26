@@ -40,13 +40,16 @@ class ActionController extends Controller
         if (!empty($checking)) {
             $random_key = Helper::unique_random('actions', 'key');
             Action::create([
-                'name'          => utf8_encode($request->name),
-                'description'   => $request->description,
-                'key'           => $random_key,
-                'points'        => $request->points,
-                'type'          => 'plus',
-                'status'        => $request->status,
-                'client_id'     => $checking->id
+                'name'              => utf8_encode($request->name),
+                'description'       => $request->description,
+                'key'               => $random_key,
+                'points'            => $request->points,
+                'type'              => 'plus',
+                'status'            => $request->status,
+                'client_id'         => $checking->id,
+                'action_frequency'  => $request->action_frequency_val,
+                'start_date'        => $request->start_date,
+                'end_date'          => $request->end_date,
             ]);
             return (new StatusCollection(true, 'You are added new action successfully.'))->response()->setStatusCode(200);
         }
@@ -122,6 +125,9 @@ class ActionController extends Controller
             $action->name = utf8_encode($request->name);
             $action->description = utf8_encode($request->description);
             $action->points = utf8_encode($request->points);
+            $action->action_frequency = $request->action_frequency_val ?? $action->action_frequency;
+            $action->start_date = $request->start_date ?? $action->start_date;
+            $action->end_date = $request->end_date ?? $action->end_date;
             $action->status = (boolean) $request->status ?? $action->status;
             $action->save();
             return new ActionResource($action);

@@ -1511,6 +1511,15 @@
                                     "points": {
                                         "type": "string"
                                     },
+                                    "action_frequency_val": {
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
+                                        "type": "string"
+                                    },
                                     "status": {
                                         "type": "boolean"
                                     }
@@ -1592,6 +1601,15 @@
                                         "type": "string"
                                     },
                                     "action_key": {
+                                        "type": "string"
+                                    },
+                                    "action_frequency_val": {
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
                                         "type": "string"
                                     },
                                     "status": {

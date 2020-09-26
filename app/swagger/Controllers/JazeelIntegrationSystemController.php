@@ -930,7 +930,9 @@
  * )
  */
 
-
+'action_frequency'  => $request->action_frequency_val,
+                'start_date'        => $request->start_date,
+                'end_date'          => $request->end_date,
 
 /**
  * @OA\Post(
@@ -942,12 +944,15 @@
  *         @OA\MediaType(
  *             mediaType="application/x-www-form-urlencoded",
  *             @OA\Schema(
- *                 @OA\Property(property="client_id",       type="string", description="Unique brand id."),
- *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
- *                 @OA\Property(property="name",            type="string"),
- *                 @OA\Property(property="description",     type="string"),
- *                 @OA\Property(property="points",          type="string"),
- *                 @OA\Property(property="status",          type="boolean"),
+ *                 @OA\Property(property="client_id",                       type="string", description="Unique brand id."),
+ *                 @OA\Property(property="client_secret",                   type="string", description="Unique brand secret."),
+ *                 @OA\Property(property="name",                            type="string"),
+ *                 @OA\Property(property="description",                     type="string"),
+ *                 @OA\Property(property="points",                          type="string"),
+ *                 @OA\Property(property="action_frequency_val",            type="string"),
+ *                 @OA\Property(property="start_date",                      type="string"),
+ *                 @OA\Property(property="end_date",                        type="string"),
+ *                 @OA\Property(property="status",                          type="boolean"),
  *             )
  *         )
  *     ),
@@ -990,13 +995,16 @@
  *         @OA\MediaType(
  *             mediaType="application/x-www-form-urlencoded",
  *             @OA\Schema(
- *                 @OA\Property(property="client_id",       type="string", description="Unique brand id."),
- *                 @OA\Property(property="client_secret",   type="string", description="Unique brand secret."),
- *                 @OA\Property(property="name",            type="string"),
- *                 @OA\Property(property="description",     type="string"),
- *                 @OA\Property(property="points",          type="string"),
- *                 @OA\Property(property="action_key",      type="string"),
- *                 @OA\Property(property="status",          type="boolean"),
+ *                 @OA\Property(property="client_id",                       type="string", description="Unique brand id."),
+ *                 @OA\Property(property="client_secret",                   type="string", description="Unique brand secret."),
+ *                 @OA\Property(property="name",                            type="string"),
+ *                 @OA\Property(property="description",                     type="string"),
+ *                 @OA\Property(property="points",                          type="string"),
+ *                 @OA\Property(property="action_key",                      type="string"),
+ *                 @OA\Property(property="action_frequency_val",            type="string"),
+ *                 @OA\Property(property="start_date",                      type="string"),
+ *                 @OA\Property(property="end_date",                        type="string"),
+ *                 @OA\Property(property="status",                          type="boolean"),
  *             )
  *         )
  *     ),
