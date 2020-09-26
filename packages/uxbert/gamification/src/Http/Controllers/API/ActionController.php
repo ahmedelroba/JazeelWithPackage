@@ -65,7 +65,7 @@ class ActionController extends Controller
         if (!empty($checking) && !empty($request->action_key)) {
             $action = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
             if($action)
-                return ActionResource::collection($action);
+                return new ActionResource($action);
             else
                 return (new StatusCollection(false, 'Please enter correct action_key.'))->response()->setStatusCode(401);
         }
@@ -100,7 +100,7 @@ class ActionController extends Controller
         if (!empty($checking) && !empty($request->action_key)) {
             $action = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();
             if($action)
-                return ActionResource::collection($action);
+                return new ActionResource($action);
             else
                 return (new StatusCollection(false, 'Please enter correct action_key.'))->response()->setStatusCode(401);
         }
