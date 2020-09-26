@@ -150,8 +150,9 @@ class UsersController extends Controller
                     'type'                  => $action->type,
                     'client_id'              => $checking->id,
                     'description'           => $request->description ?? '',
+                    'element'           => $request->element ?? '',
                 ]);
-                return (new StatusCollection(true, 'You are added new action for your user successfully.'))->response()->setStatusCode(200);
+                return (new StatusCollection(true, 'You are added new action for your user successfully.', $action->points))->response()->setStatusCode(200);
             } else
                 return (new StatusCollection(false, 'Please enter correct action key.'))->response()->setStatusCode(401);
         }
