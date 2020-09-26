@@ -9,19 +9,20 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "fideloper/proxy": "^4.0",
-        "laravel/framework": "^6.18.35",
-        "laravel/tinker": "^2.0",
         "ahmedawm2/telescope-mongodb-laravel6": "^3.0@dev",
         "darkaonline/l5-swagger": "6.*",
         "designmynight/laravel-mongodb-passport": "^1.2",
+        "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "jenssegers/mongodb": "^3.6",
+        "laravel/framework": "^6.18.35",
+        "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.0",
         "mongodb/mongodb": "^1.6",
         "mostafamaklad/laravel-permission-mongodb": "^2.0",
-        "yajra/laravel-datatables": "^1.5",
-        "uxbert/gamification": "@dev"
+        "predis/predis": "^1.1",
+        "uxbert/gamification": "@dev",
+        "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
