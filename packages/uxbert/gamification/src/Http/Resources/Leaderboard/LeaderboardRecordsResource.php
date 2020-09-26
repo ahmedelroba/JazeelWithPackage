@@ -18,7 +18,7 @@ class LeaderboardRecordsResource extends JsonResource
 
         return [
             'user_name' => $this->user_name,
-            'points' => > $this->points,
+            'points' =>  $this->points,
             'rank' => $this->rank,
             'user_key' => 'adssdh88',
             'user_md5_hash' => md5("test@test.com"),
