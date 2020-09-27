@@ -18,7 +18,6 @@ class ActionRegistered
 
     public function __construct(ActionRecord $action_record)
     {
-        Log::info('Showing Event: ');
 
         $this->$action_record = $action_record;
         // $this->updatePoints($action_record);

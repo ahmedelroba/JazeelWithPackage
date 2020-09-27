@@ -21,7 +21,6 @@ class UpdateActionPoints implements ShouldQueue
     {
         // Code here to update action points in user records
         $action_record = $event->action_record;
-        Log::info('Showing Update Action Points ');
 
         $this->updatePoints($action_record);
 

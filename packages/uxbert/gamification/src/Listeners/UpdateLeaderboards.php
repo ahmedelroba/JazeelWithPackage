@@ -20,7 +20,6 @@ class UpdateLeaderboards implements ShouldQueue
     {
         // Code here to update leaderboards 
         $action_record = $event->action_record;
-        Log::info('Showing Update Leaderboards ');
         // find all leaderboard for this user in the client id 
         $leaderboards = LeaderBoard::where('client_id', $action_record->client_id)->whereHas('records', function($q) use($action_record) {
                 $q->where('user_id', '=', $action_record->user_id);
