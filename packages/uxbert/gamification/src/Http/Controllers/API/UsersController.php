@@ -27,6 +27,7 @@ use Uxbert\Gamification\Http\Resources\User\BalanceResource;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
 use Uxbert\Gamification\Http\Resources\User\UserPointsRecordsResource;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardWithWinnersResource;
+use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardRecordsResource;
 
 // Models
 use App\User;
@@ -281,7 +282,7 @@ class UsersController extends Controller
                         ->orWhere('rank', ((int) $user_points_history->rank) + 1);
                     })->get();
                 
-            return UserPointsRecordsResource::collection($list);
+            return LeaderboardRecordsResource::collection($list);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
