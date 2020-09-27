@@ -40,7 +40,7 @@ class LeaderboardResource extends JsonResource
             if ($currentUserRecord->rank >= 5 )
                 $last5Records = LeaderBoardRecord::where('leaderboard_id', $this->id)->where('rank', '>', $currentUserRecord->rank)->orderBy('rank')->limit(5)->get();
             else
-                $last5Records = LeaderBoardRecord::where('leaderboard_id', $this->id)->where('rank', '>=', 5)->orderBy('rank')->limit(5)->get();
+                $last5Records = LeaderBoardRecord::where('leaderboard_id', $this->id)->where('rank', '>', 5)->orderBy('rank')->limit(5)->get();
             $returnArray['current_user'] = $currentUserRecord;
             $returnArray['last_5_records'] = $last5Records;
         }
