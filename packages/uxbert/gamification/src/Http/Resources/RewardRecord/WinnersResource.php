@@ -5,6 +5,7 @@ namespace Uxbert\Gamification\Http\Resources\RewardRecord;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Uxbert\Gamification\Http\Resources\User\UserResource;
+use Uxbert\Gamification\Models\Client_User;
 
 class WinnersResource extends JsonResource
 {
@@ -17,7 +18,8 @@ class WinnersResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = UserResource::find($this->user_id);
+        $userObject = Client_User::find($this->user_id);
+        $user = new UserResource($userObject);
         return [
             'user'                  => isset($user) ? $user : null,
             'given_to'              => $this->given_to,
