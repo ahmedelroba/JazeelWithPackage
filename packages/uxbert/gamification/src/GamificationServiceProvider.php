@@ -35,7 +35,7 @@ class GamificationServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'UxbertGamification');
         $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
-        Artisan::call('l5-swagger:generate');
+        // Artisan::call('l5-swagger:generate');
 
         $this->publishes([
             __DIR__ . '/Swagger' => config_path('/../app/'),
