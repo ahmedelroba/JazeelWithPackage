@@ -26,6 +26,8 @@ use Uxbert\Gamification\Http\Resources\Jazeel\UserWithHistoryResource;
 use Uxbert\Gamification\Http\Resources\User\BalanceResource;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
 use Uxbert\Gamification\Http\Resources\User\UserPointsRecordsResource;
+use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardWithWinnersResource;
+
 // Models
 use App\User;
 use Uxbert\Gamification\Models\Client;
@@ -242,7 +244,11 @@ class UsersController extends Controller
                                         })->first();
             if (!$leaderboard)
                 return (new StatusCollection(false, 'This user is not joined in this leaderboard.'))->response()->setStatusCode(401);
-            return new LeaderboardResource($leaderboard);
+            
+            if ($request->leaderboard_key != "all")
+                return new LeaderboardWithWinnersResource($reward);
+            else
+                return new LeaderboardResource($reward);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
