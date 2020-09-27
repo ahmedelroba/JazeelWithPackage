@@ -42,7 +42,7 @@ class ActionRecord extends Model
 
     // add events here to be fired automatically on actions
     protected $dispatchesEvents = [
-        // 'saved' => ActionRegistered::class,
+        'saved' => ActionRegistered::class,
     ];
 
 }
