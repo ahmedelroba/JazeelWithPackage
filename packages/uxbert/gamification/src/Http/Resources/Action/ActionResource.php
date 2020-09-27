@@ -18,9 +18,12 @@ class ActionResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'key' => $this->key,
-            'type' => $this->type,
+            // 'type' => $this->type,
             'status' => true,
             'points' => $this->points,
+            'action_frequency_val' => $this->action_frequency,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
         ];
     }
 }

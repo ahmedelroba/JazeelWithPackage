@@ -22,7 +22,7 @@ class ActionController extends Controller
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
-             $actions = Action::where('client_id', $checking->id)->get();
+             $actions = Action::where('client_id', $checking->id)->orderBy('created_at', 'desc')->get();
             return ActionResource::collection($actions);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);

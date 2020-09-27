@@ -30,7 +30,7 @@ class LeaderBoardController extends Controller
         // return LeaderboardResource::collection(["1", "2"]);
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
-            $leaderboard = LeaderBoard::where('client_id', $checking->id)->get();
+            $leaderboard = LeaderBoard::where('client_id', $checking->id)->orderBy('created_at', 'desc')->get();
             return LeaderboardResource::collection($leaderboard);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
