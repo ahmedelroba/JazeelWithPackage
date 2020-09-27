@@ -53,6 +53,7 @@ class RewardWithWinnersResource extends JsonResource
             "image"         => Helper::GetURL($this->image),
             'sponsor'       => new SponsorResource($sponsor),
             'key'           => $this->key,
+            'ssss'          => 'ssss',
             'winners'       => WinnersResource::collection($winners),
         ];
     }

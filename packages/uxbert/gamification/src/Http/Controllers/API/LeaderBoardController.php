@@ -216,6 +216,7 @@ class LeaderBoardController extends Controller
                 $rewards = json_decode($leaderBoard->rewards);
                 foreach($rewards as $value){
                     $reward = Reward::where("key", '=', $value->reward_key)->first();
+                    $rank = $value->rank;
 
                     // RewardsRecord::create([
                     //     'user_id' => , // We will fill it only when we send gift to winner
@@ -229,10 +230,10 @@ class LeaderBoardController extends Controller
                             
 
                     
-                    // $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
+                    $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
                 }
-            } 
             return (new StatusCollection(true, 'We are closed leaderboard Successfully.'))->response()->setStatusCode(200);
+            } 
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
