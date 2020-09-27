@@ -8,9 +8,10 @@ use Uxbert\Gamification\Models\LeaderBoard;
 use Uxbert\Gamification\Models\LeaderBoardRecord;
 use Illuminate\Support\Facades\Log;
   use Illuminate\Support\Facades\Redis;
+  use Illuminate\Queue\InteractsWithQueue;
 class UpdateActionPoints implements ShouldQueue
 {
-
+    use InteractsWithQueue;
     public function __construct()
     {
         //
