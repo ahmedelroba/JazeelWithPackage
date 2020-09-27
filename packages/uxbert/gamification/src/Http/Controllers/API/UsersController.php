@@ -253,6 +253,34 @@ class UsersController extends Controller
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
 
+
+    /**
+     * Show all brand's users points history.
+     *
+     * @param string client_id
+     * @param string client_secret
+     * @param string referral_key
+     */
+    public function featuredRanks(Request $request)
+    {
+        $checking = $this->checkingClientIdAndSecret($request);
+        if (!empty($checking)) {
+            $leaderboard = LeaderBoard::where('key', 'all')->where('client_id', $checking->id)->first();
+
+            $user = Client_User::where('referral_key', $request->user_referral_key)->first();
+            $user_points_history = ActionRecord::where('client_id', $checking->id)->where('user_id', $user->id)->where('leaderboard_id', $leaderboard->id)->first();
+            $list = ActionRecord::where('client_id', $checking->id)->where('leaderboard_id', $leaderboard->id) ->where(function($query) use ($user_points_history)
+                {
+                    $query->where('rank', $user_points_history->rank)
+                    ->orWhere('rank', ((int) $user_points_history->rank) - 1)
+                    ->orWhere('rank', ((int) $user_points_history->rank) + 1);
+                })->get();
+            return UserPointsRecordsResource::collection($list);
+        }
+        return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
+    }
+
+
     /**
      * This function for checking Client id and Client Secret.
      *

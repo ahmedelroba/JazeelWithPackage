@@ -51,6 +51,7 @@
  * )
  */
 
+ 
 /**
  * @OA\Post(
  *     path="/users/add_point",
@@ -68,6 +69,51 @@
  *                 @OA\Property(property="description", type="string", description="Brand's action key (Static key)."),
  *                 @OA\Property(property="element_id", type="string", description="You can save id of your database model."),
  *                 @OA\Property(property="element_type", type="string", description="You can save your database model name."),
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=422,
+ *         description="Validation error",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Cutom error message",
+ *         @OA\JsonContent(
+ *             type="string"
+ *         ),
+ *     ),
+ *     security={
+ *         {"petstore_auth": {"write:pets", "read:pets"}}
+ *     },
+ * )
+ */
+
+
+
+/**
+ * @OA\Post(
+ *     path="/users/get_featured_ranks",
+ *     tags={"Users"},
+ *     summary="Brands can add lot of actions for users for give them points and make users history.",
+ *     operationId="get_featured_ranks",
+ *      @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/x-www-form-urlencoded",
+ *             @OA\Schema(
+ *                 @OA\Property(property="client_id", type="string", description="Unique brand id."),
+ *                 @OA\Property(property="client_secret", type="string", description="Unique brand secret."),
+ *                 @OA\Property(property="user_referral_key", type="string", description="Brand's user referral key, it saved in jazeel when user created."),
  *             )
  *         )
  *     ),
