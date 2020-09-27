@@ -21,7 +21,7 @@ class WinnersResource extends JsonResource
         $userObject = Client_User::find($this->user_id);
         $user = new UserResource($userObject);
         return [
-            'user'                  => $userObject,
+            'user'                  => 'ss',
             'given_to'              => $this->given_to,
             'leaderboard_rank'      => $this->leaderboard_rank,
             'status'                => $this->status,
