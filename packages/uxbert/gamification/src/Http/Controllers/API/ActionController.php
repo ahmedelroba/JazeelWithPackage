@@ -128,7 +128,7 @@ class ActionController extends Controller
             $action->action_frequency = $request->action_frequency_val ?? $action->action_frequency;
             $action->start_date = $request->start_date ?? $action->start_date;
             $action->end_date = $request->end_date ?? $action->end_date;
-            $action->status = (boolean) $request->status ?? $action->status;
+            $action->status =  $request->status ?? $action->status;
             $action->save();
             return new ActionResource($action);
         }
