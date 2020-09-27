@@ -13,7 +13,7 @@ class LeaderBoard extends Model
     protected $collection = 'leaderboards';
 
     protected $fillable = [
-        'name', 'description', 'key', 'date_from', 'date_to', 'client_id', 'terms', 'rewards'
+        'name', 'description', 'key', 'date_from', 'date_to', 'client_id', 'terms', 'rewards', 'status'
     ];
 
     public function client()

@@ -21,7 +21,7 @@ class ActionRegistered
         Log::info('Showing Event: ');
 
         $this->$action_record = $action_record;
-        $this->updatePoints($action_record);
+        // $this->updatePoints($action_record);
     }
 
 
@@ -37,7 +37,7 @@ class ActionRegistered
             if ($userRecord) {
                 $userRecord->points = $user->total_earned_points;
                 $userRecord->save();
-                $this->updateRanks($leaderboard, $action_record);
+                // $this->updateRanks($leaderboard, $action_record);
             }
             // check if user not joind yet we will add him to with his points 
             else {
@@ -50,7 +50,7 @@ class ActionRegistered
                         'leaderboard_id' => $leaderboard->id,
                         'client_id' => $action_record->client_id
                     ]);
-                    $this->updateRanks($leaderboard, $action_record);
+                    // $this->updateRanks($leaderboard, $action_record);
                 }
             }
         }

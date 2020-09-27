@@ -125,7 +125,6 @@ class UsersController extends Controller
      */
     public function add_points(AddNewBrandUserActionRequest $request)
     {
-        Log::info('Add Points FUNCTION: ');
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
             $action = Action::where('client_id', $checking->id)->where('key', $request->action_key)->first();

@@ -102,7 +102,8 @@ class LeaderBoardController extends Controller
                 'date_to'       => $request->date_to,
                 'terms'         => $request->terms,
                 'rewards'       => json_encode($rewardsJsonArray),
-                'client_id'     => $checking->id
+                'client_id'     => $checking->id,
+                'status'        => 'opening'
             ]);
             return new LeaderboardResource($leaderboard);
         }
@@ -212,6 +213,9 @@ class LeaderBoardController extends Controller
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
             $leaderBoard = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
+            if ($leaderBoard->status == 'closed')
+                return (new StatusCollection(false, 'This is leaderboard is already closed.'))->response()->setStatusCode(401);
+
             if(!empty($leaderBoard->rewards)) {
                 $rewards = json_decode($leaderBoard->rewards);
                 foreach($rewards as $value){
@@ -230,6 +234,8 @@ class LeaderBoardController extends Controller
                     ]);
                     // $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
                 }
+                $leaderBoard->status = 'closed';
+                $leaderBoard->save();
             return (new StatusCollection(true, 'We are closed leaderboard Successfully.'))->response()->setStatusCode(200);
             } 
         }
