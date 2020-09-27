@@ -64,7 +64,10 @@ class LeaderBoardController extends Controller
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking) && !empty($request->leaderboard_key)) {
             $reward = LeaderBoard::where('client_id', $checking->id)->where('key', $request->leaderboard_key)->first();
-            return new LeaderboardWithWinnersResource($reward);
+            if ($request->leaderboard_key != "all")
+                return new LeaderboardWithWinnersResource($reward);
+            else
+                return new LeaderboardResource($reward);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }

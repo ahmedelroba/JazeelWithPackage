@@ -47,6 +47,7 @@ class RewardWithWinnersResource extends JsonResource
         return [
             'leaderboard_id'          => $this->leaderboard_id,
             'name'          => $this->name,
+            'short_description'   => $this->short_description,
             'description'   => $this->description,
             'quantity'      => $this->quantity,
             "image"         => Helper::GetURL($this->image),

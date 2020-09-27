@@ -20,7 +20,6 @@ class RewardsRecord extends Model
         'leaderboard_id', // optional
         'status', // awarded/pending/cacnelled/etc
         'given_at', // date of given reward to user
-
     ];
 
     public function reward()

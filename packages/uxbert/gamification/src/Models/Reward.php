@@ -14,6 +14,7 @@ class Reward extends Model
 
     protected $fillable = [
         'name',
+        'short_description', 
         'description', 
         'quantity', 
         'image', 

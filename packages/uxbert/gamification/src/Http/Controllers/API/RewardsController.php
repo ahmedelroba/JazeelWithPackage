@@ -85,6 +85,7 @@ class RewardsController extends Controller
             $random_key = Helper::unique_random('sponsors', 'key');
             $reward = Reward::create([
                 'name'          => utf8_encode($request->name),
+                'short_description'   => utf8_encode($request->short_description),
                 'description'   => utf8_encode($request->description),
                 'image'         => $fileMedia,
                 'key'           => $random_key,
@@ -121,6 +122,7 @@ class RewardsController extends Controller
             }
 
             $reward->name           = utf8_encode($request->name);
+            $reward->short_description    = utf8_encode($request->short_description);
             $reward->description    = utf8_encode($request->description);
             $reward->image          = $fileMedia ?? $reward->image;
             $reward->quantity       =  $request->quantity;

@@ -23,6 +23,7 @@ class RewardResource extends JsonResource
         $sponsor = Sponsor::find($this->sponsor_id);
         return [
             'name'          => $this->name,
+            'short_description'   => $this->short_description,
             'description'   => $this->description,
             'quantity'      => $this->quantity,
             "image"         => Helper::GetURL($this->image),
