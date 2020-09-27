@@ -207,7 +207,7 @@ class LeaderBoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function closeLeaderboards()
+    public function closeLeaderboards(Request $request)
     {
         $checking = $this->checkingClientIdAndSecret($request);
         if (!empty($checking)) {
