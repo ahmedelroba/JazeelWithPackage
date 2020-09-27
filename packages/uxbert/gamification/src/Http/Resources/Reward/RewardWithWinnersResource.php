@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
 use Uxbert\Gamification\Http\Resources\Sponsor\SponsorResource;
-use Uxbert\Gamification\Http\Resources\RewardHistory\WinnersResource;
+use Uxbert\Gamification\Http\Resources\RewardRecord\WinnersResource;
 use Uxbert\Gamification\Models\Sponsor;
 use Uxbert\Gamification\Models\RewardsRecord;
 use Uxbert\Gamification\Helpers\Helper;
@@ -53,7 +53,6 @@ class RewardWithWinnersResource extends JsonResource
             "image"         => Helper::GetURL($this->image),
             'sponsor'       => new SponsorResource($sponsor),
             'key'           => $this->key,
-            'ssss'          => 'ssss',
             'winners'       => WinnersResource::collection($winners),
         ];
     }

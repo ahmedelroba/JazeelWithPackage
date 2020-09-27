@@ -217,8 +217,9 @@ class LeaderBoardController extends Controller
                 foreach($rewards as $value){
                     $reward = Reward::where("key", '=', $value->reward_key)->first();
                     $rank = $value->rank;
+                    $getUserByRank = LeaderBoardRecord::
 
-                    // RewardsRecord::create([
+                    // LeaderboardRecordsResource::create([
                     //     'user_id' => , // We will fill it only when we send gift to winner
                     //     'reward_id' => , // Reward
                     //     'given_to' => , // (leaderboard/campaign/goals/missions/achievement)
