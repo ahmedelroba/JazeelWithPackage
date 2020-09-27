@@ -151,10 +151,10 @@ class UsersController extends Controller
                     'action_id'             => $action->id,
                     'current_points'        => $minusSign . $action->points,
                     'type'                  => $action->type,
-                    'client_id'              => $checking->id,
+                    'client_id'             => $checking->id,
                     'description'           => $request->description ?? '',
-                    'element_id'           => $request->element_id ?? '',
-                    'element_type'           => $request->element_type ?? '',
+                    'element_id'            => $request->element_id ?? '',
+                    'element_type'          => $request->element_type ?? '',
                 ]);
                 return (new StatusCollection(true, 'You are added new action for your user successfully.', $action->points))->response()->setStatusCode(200);
             } else

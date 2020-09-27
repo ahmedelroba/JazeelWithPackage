@@ -21,8 +21,8 @@ class ActionRecord extends Model
         'type', 
         'description', 
         'category_id',
-        'element_id', // 123
-        'element_type', // SharekEvent
+        'element_id', // 123, optional
+        'element_type', // SharekEvent, optional
     ];
 
     public function user()

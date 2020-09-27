@@ -155,6 +155,10 @@
                                         "description": "Brand's action key (Static key).",
                                         "type": "string"
                                     },
+                                    "description": {
+                                        "description": "Brand's action key (Static key).",
+                                        "type": "string"
+                                    },
                                     "element_id": {
                                         "description": "You can save id of your database model.",
                                         "type": "string"
