@@ -37,6 +37,7 @@ use Uxbert\Gamification\Models\ActionRecord;
 use Uxbert\Gamification\Models\ClientPoints;
 use Uxbert\Gamification\Models\UserJoiningClient;
 use Uxbert\Gamification\Models\LeaderBoard;
+use Uxbert\Gamification\Models\LeaderBoardRecord;
 
 
 
@@ -269,9 +270,9 @@ class UsersController extends Controller
             $leaderboard = LeaderBoard::where('key', 'all')->where('client_id', $checking->id)->first();
 
             $user = Client_User::where('referral_key', $request->user_referral_key)->first();
-            $user_points_history = ActionRecord::where('client_id', $checking->id)->where('user_id', $user->id)->where('leaderboard_id', $leaderboard->id)->first();
+            $user_points_history = LeaderBoardRecord::where('client_id', $checking->id)->where('user_id', $user->id)->where('leaderboard_id', $leaderboard->id)->first();
             if (isset( $user_points_history ))
-                $list = ActionRecord::where('client_id', $checking->id)
+                $list = LeaderBoardRecord::where('client_id', $checking->id)
                     ->where('leaderboard_id', $leaderboard->id) 
                     ->where(function($query) use ($user_points_history)
                     {
