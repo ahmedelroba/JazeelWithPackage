@@ -65,6 +65,8 @@
  *                 @OA\Property(property="client_secret", type="string", description="Unique brand secret."),
  *                 @OA\Property(property="user_referral_key", type="string", description="Brand's user referral key, it saved in jazeel when user created."),
  *                 @OA\Property(property="action_key", type="string", description="Brand's action key (Static key)."),
+ *                 @OA\Property(property="element_id", type="string", description="You can save id of your database model."),
+ *                 @OA\Property(property="element_type", type="string", description="You can save your database model name."),
  *             )
  *         )
  *     ),
