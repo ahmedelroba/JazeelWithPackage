@@ -217,7 +217,7 @@ class LeaderBoardController extends Controller
                 foreach($rewards as $value){
                     $reward = Reward::where("key", '=', $value->reward_key)->first();
                     $rank = $value->rank;
-                    $getUserByRank = LeaderBoardRecord::where('rank', $rank)->where('leaderboard_id',$leaderBoard->id)->where('client_id',$checking->id )->first();
+                    return $getUserByRank = LeaderBoardRecord::where('rank', $rank)->where('leaderboard_id',$leaderBoard->id)->where('client_id',$checking->id )->first();
 
                     RewardsRecord::create([
                         'user_id' => $getUserByRank->id, // We will fill it only when we send gift to winner
