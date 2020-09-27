@@ -217,7 +217,7 @@ class UsersController extends Controller
         if (!empty($checking)) {
             $user = Client_User::where('referral_key', $request->user_referral_key)->first();
             if (!empty($user))
-                return new BalanceResource($user);
+                return new BalanceResource($user, $checking->id, $user->id);
             else
                 return (new StatusCollection(false, 'Please enter correct user_id.'))->response()->setStatusCode(401);
         }

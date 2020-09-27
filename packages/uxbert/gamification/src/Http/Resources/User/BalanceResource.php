@@ -11,6 +11,26 @@ use Uxbert\Gamification\Models\LeaderBoard;
 class BalanceResource extends JsonResource
 {
     /**
+     * @var
+     */
+    private $client_id, $user_id;
+
+    /**
+     * Create a new resource instance.
+     *
+     * @param  mixed  $resource
+     * @return void
+     */
+    public function __construct($resource, $client_id, $user_id)
+    {
+        // Ensure you call the parent constructor
+        parent::__construct($resource);
+        $this->resource = $resource;
+        
+        $this->client_id = $client_id;
+        $this->user_id = $user_id;
+    }
+    /**
      * Transform the resource collection into an array.
      *
      *
@@ -19,11 +39,12 @@ class BalanceResource extends JsonResource
      */
     public function toArray($request)
     {
-        // $leaderboard = LeaderBoard::where('key', 'all')->first();
-        // $rankOfAllTimeLeaderboard = LeaderBoardRecord::
+        $leaderboard = LeaderBoard::where('key', 'all')->where('client_id', $this->client_id)->first();
+        if ($leaderboard)
+            $rankOfAllTimeLeaderboard = LeaderBoardRecord::where('client_id', $this->client_id)->where('leaderboard_id', $leaderboard->id)->where('user_id', $this->user_id)->first();
         return [
             "points" => $this->total_earned_points,
-            "rank" => 1,
+            "rank" => isset($rankOfAllTimeLeaderboard) ? optional($rankOfAllTimeLeaderboard)->rank : 999999,
         ];
     }
 }
