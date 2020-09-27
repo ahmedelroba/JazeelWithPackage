@@ -10,7 +10,6 @@
         }
     },
     "require": {
-        "ahmedawm2/telescope-mongodb-laravel6": "^3.0@dev",
         "darkaonline/l5-swagger": "6.*",
         "designmynight/laravel-mongodb-passport": "^1.2",
         "fruitcake/laravel-cors": "^1.0",

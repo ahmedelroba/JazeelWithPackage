@@ -9,7 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "ahmedawm2/telescope-mongodb-laravel6": "^3.0@dev",
         "darkaonline/l5-swagger": "6.*",
         "designmynight/laravel-mongodb-passport": "^1.2",
         "fideloper/proxy": "^4.0",
