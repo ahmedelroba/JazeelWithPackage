@@ -9,6 +9,7 @@ Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix
     Route::post('find', 'LeaderBoardController@find');
     Route::post('search', 'LeaderBoardController@search');
     Route::post('fake_records', 'LeaderBoardController@addFackRecords');
+    Route::post('close', 'LeaderBoardController@closeLeaderboards');
 });
 
 Route::group(['namespace' => 'Uxbert\Gamification\Http\Controllers\API', 'prefix' => 'api/actions', 'middleware' => 'api'], function () {
