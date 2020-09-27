@@ -1,6 +1,6 @@
 <?php
 
-namespace Uxbert\Gamification\Http\Resources\Jazeel;
+namespace Uxbert\Gamification\Http\Resources\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,10 +16,9 @@ class UserPointsRecordsResource extends JsonResource
     {
         return [
             'name' => $this->action->name,
-            'description' => $this->action->description,
+            'description' => $this->description,
             'key' => $this->action->key,
             'points' => $this->current_points,
-            'type' => $this->type,
             'created_at' => $this->created_at->timestamp,
         ];
     }

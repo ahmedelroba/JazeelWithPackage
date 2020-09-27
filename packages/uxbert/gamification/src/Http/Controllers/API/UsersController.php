@@ -25,7 +25,7 @@ use Uxbert\Gamification\Http\Resources\Jazeel\UserPointsHistoryResource;
 use Uxbert\Gamification\Http\Resources\Jazeel\UserWithHistoryResource;
 use Uxbert\Gamification\Http\Resources\User\BalanceResource;
 use Uxbert\Gamification\Http\Resources\Leaderboard\LeaderboardResource;
-
+use Uxbert\Gamification\Http\Resources\User\UserPointsRecordsResource;
 // Models
 use App\User;
 use Uxbert\Gamification\Models\Client;
@@ -176,7 +176,7 @@ class UsersController extends Controller
         if (!empty($checking)) {
             $user = Client_User::where('referral_key', $request->user_referral_key)->first();
             $user_points_history = ActionRecord::where('client_id', $checking->id)->where('user_id', $user->id)->get();
-            return UserPointsHistoryResource::collection($user_points_history);
+            return UserPointsRecordsResource::collection($user_points_history);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
