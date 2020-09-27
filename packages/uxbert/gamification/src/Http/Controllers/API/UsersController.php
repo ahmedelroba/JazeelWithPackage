@@ -273,7 +273,7 @@ class UsersController extends Controller
             $user = Client_User::where('referral_key', $request->user_referral_key)->first();
             $user_points_history = LeaderBoardRecord::where('client_id', $checking->id)->where('user_id', $user->id)->where('leaderboard_id', $leaderboard->id)->first();
             if (isset( $user_points_history ))
-               return  $list = LeaderBoardRecord::where('client_id', $checking->id)
+                $list = LeaderBoardRecord::where('client_id', $checking->id)
                     ->where('leaderboard_id', $leaderboard->id) 
                     ->where(function($query) use ($user_points_history)
                     {
