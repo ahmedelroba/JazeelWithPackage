@@ -226,7 +226,7 @@ class LeaderBoardController extends Controller
                         'leaderboard_rank' => $value->rank, // optional
                         'leaderboard_id' =>  $leaderBoard->id, // optional
                         'status' =>  'pending', // awarded/pending/cacnelled/etc
-                        'given_at' => (new DateTime())->getTimestamp(), // date of given reward to user
+                        'given_at' => (new \DateTime())->getTimestamp(), // date of given reward to user
                     ]);
                     // $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
                 }
