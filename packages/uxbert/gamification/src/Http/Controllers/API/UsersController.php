@@ -246,9 +246,9 @@ class UsersController extends Controller
                 return (new StatusCollection(false, 'This user is not joined in this leaderboard.'))->response()->setStatusCode(401);
             
             if ($request->leaderboard_key != "all")
-                return new LeaderboardWithWinnersResource($reward);
+                return new LeaderboardWithWinnersResource($leaderboard);
             else
-                return new LeaderboardResource($reward);
+                return new LeaderboardResource($leaderboard);
         }
         return (new StatusCollection(false, 'Please enter correct cliend_id and client_secret.'))->response()->setStatusCode(401);
     }
