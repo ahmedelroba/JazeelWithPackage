@@ -1213,12 +1213,12 @@
                 ]
             }
         },
-        "/leaderboard/get_users_of_leaderboard": {
+        "/leaderboard/find": {
             "post": {
                 "tags": [
                     "Leaderboard"
                 ],
-                "summary": "Get all Users in leaderboards.",
+                "summary": "Get details of leaderboard.",
                 "operationId": "listUsersLeaderboard",
                 "requestBody": {
                     "content": {
@@ -1284,13 +1284,13 @@
                 ]
             }
         },
-        "/leaderboard/find": {
+        "/leaderboard/close": {
             "post": {
                 "tags": [
                     "Leaderboard"
                 ],
                 "summary": "Get details of leaderboard.",
-                "operationId": "listUsersLeaderboard",
+                "operationId": "leaderboardClose",
                 "requestBody": {
                     "content": {
                         "application/x-www-form-urlencoded": {

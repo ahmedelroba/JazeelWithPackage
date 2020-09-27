@@ -217,21 +217,18 @@ class LeaderBoardController extends Controller
                 foreach($rewards as $value){
                     $reward = Reward::where("key", '=', $value->reward_key)->first();
                     $rank = $value->rank;
-                    $getUserByRank = LeaderBoardRecord::
+                    $getUserByRank = LeaderBoardRecord::where('rank', $rank)->where('leaderboard_id',$leaderBoard->id)->where('client_id',$checking->id )->first();
 
-                    // LeaderboardRecordsResource::create([
-                    //     'user_id' => , // We will fill it only when we send gift to winner
-                    //     'reward_id' => , // Reward
-                    //     'given_to' => , // (leaderboard/campaign/goals/missions/achievement)
-                    //     'leaderboard_rank' => $value->rank, // optional
-                    //     'leaderboard_id' =>  $leaderBoard->id, // optional
-                    //     'status' =>  'awarded', // awarded/pending/cacnelled/etc
-                    //     'given_at' => (new DateTime())->getTimestamp(), // date of given reward to user
-                    // ]);
-                            
-
-                    
-                    $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
+                    LeaderboardRecordsResource::create([
+                        'user_id' => $getUserByRank->id, // We will fill it only when we send gift to winner
+                        'reward_id' => $reward->id, // Reward
+                        'given_to' => 'leaderboard', // (leaderboard/campaign/goals/missions/achievement)
+                        'leaderboard_rank' => $value->rank, // optional
+                        'leaderboard_id' =>  $leaderBoard->id, // optional
+                        'status' =>  'pending', // awarded/pending/cacnelled/etc
+                        'given_at' => (new DateTime())->getTimestamp(), // date of given reward to user
+                    ]);
+                    // $rewardsJsonArray[] = array('reward' => new RewardResource($reward), 'rank' => $value->rank);
                 }
             return (new StatusCollection(true, 'We are closed leaderboard Successfully.'))->response()->setStatusCode(200);
             } 

@@ -322,6 +322,8 @@
  * )
  */
 
+ 
+
 
 
 
@@ -744,11 +746,12 @@
 
 
 
+
 /**
  * @OA\Post(
- *     path="/leaderboard/get_users_of_leaderboard",
+ *     path="/leaderboard/find",
  *     tags={"Leaderboard"},
- *     summary="Get all Users in leaderboards.",
+ *     summary="Get details of leaderboard.",
  *     operationId="listUsersLeaderboard",
  *      @OA\RequestBody(
  *         @OA\MediaType(
@@ -790,12 +793,13 @@
 
 
 
+
 /**
  * @OA\Post(
- *     path="/leaderboard/find",
+ *     path="/leaderboard/close",
  *     tags={"Leaderboard"},
  *     summary="Get details of leaderboard.",
- *     operationId="listUsersLeaderboard",
+ *     operationId="leaderboardClose",
  *      @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/x-www-form-urlencoded",
