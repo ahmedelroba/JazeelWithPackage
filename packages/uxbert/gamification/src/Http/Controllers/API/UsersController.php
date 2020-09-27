@@ -268,8 +268,10 @@ class UsersController extends Controller
             $leaderboard = LeaderBoard::where('key', 'all')->where('client_id', $checking->id)->first();
 
             $user = Client_User::where('referral_key', $request->user_referral_key)->first();
-            $user_points_history = ActionRecord::where('client_id', $checking->id)->where('user_id', $user->id)->where('leaderboard_id', $leaderboard->id)->first();
-            $list = ActionRecord::where('client_id', $checking->id)->where('leaderboard_id', $leaderboard->id) ->where(function($query) use ($user_points_history)
+            return $user_points_history = ActionRecord::where('client_id', $checking->id)->where('user_id', $user->id)->where('leaderboard_id', $leaderboard->id)->first();
+            $list = ActionRecord::where('client_id', $checking->id)
+                ->where('leaderboard_id', $leaderboard->id) 
+                ->where(function($query) use ($user_points_history)
                 {
                     $query->where('rank', $user_points_history->rank)
                     ->orWhere('rank', ((int) $user_points_history->rank) - 1)
