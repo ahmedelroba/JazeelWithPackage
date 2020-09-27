@@ -18,10 +18,10 @@ class WinnersResource extends JsonResource
      */
     public function toArray($request)
     {
-        $userObject = Client_User::where('_id', $this->user_id)->first();
+        $userObject = Client_User::find($this->user_id);
         $user = new UserResource($userObject);
         return [
-            'user'                  => $this->user_id,
+            'user'                  => $user,
             'given_to'              => $this->given_to,
             'leaderboard_rank'      => $this->leaderboard_rank,
             'status'                => $this->status,

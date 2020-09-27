@@ -220,7 +220,7 @@ class LeaderBoardController extends Controller
                     $getUserByRank = LeaderBoardRecord::where('leaderboard_id',$leaderBoard->id)->where('client_id',$checking->id )->first();
 
                     RewardsRecord::create([
-                        'user_id' => $getUserByRank->id, // We will fill it only when we send gift to winner
+                        'user_id' => $getUserByRank->user_id, // We will fill it only when we send gift to winner
                         'reward_id' => $reward->id, // Reward
                         'given_to' => 'leaderboard', // (leaderboard/campaign/goals/missions/achievement)
                         'leaderboard_rank' => $value->rank, // optional
